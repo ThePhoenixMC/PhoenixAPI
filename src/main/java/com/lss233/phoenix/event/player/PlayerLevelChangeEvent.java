@@ -11,7 +11,16 @@ import com.lss233.phoenix.event.Event;
  * </ul>
  */
 
-public interface PlayerLevelChangeEvent extends Event
-{
+public interface PlayerLevelChangeEvent extends Event {
+    /**
+     * Gets the new level of the human.
+     * @return The new level of the human.
+     */
+    int getLevel();
 
+    /**
+     * Gets the original level of the human.
+     * @return The original level of the human.
+     */
+    int getOriginalLevel();
 }
