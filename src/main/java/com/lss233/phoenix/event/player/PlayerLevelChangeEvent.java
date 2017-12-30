@@ -11,7 +11,7 @@ import com.lss233.phoenix.event.Event;
  * </ul>
  */
 
-public interface PlayerLevelChangeEvent extends Event,Cancellable
+public interface PlayerLevelChangeEvent extends Event
 {
 
 }
