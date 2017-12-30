@@ -5,7 +5,7 @@ import com.lss233.phoenix.event.Event;
 import com.lss233.phoenix.event.cause.entity.DamageModifier;
 
 /**
- * Represents the base event for when an Entity is being "attacked".
+ * <p>Represents the base event for when an Entity is being "attacked".</p>
  */
 public interface DamageEntityEvent extends Event, Cancellable {
 
