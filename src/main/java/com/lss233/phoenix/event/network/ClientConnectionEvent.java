@@ -6,6 +6,29 @@ import com.lss233.phoenix.event.Event;
  *
  */
 public interface ClientConnectionEvent extends Event {
-    interface Join extends Event {
+
+    /**
+     * Called asynchronously when the client attempts to authenticate against the server.
+     */
+    interface Auth extends ClientConnectionEvent{
+
+    }
+    /**
+     * Called when a Player joins the game World for the first time after initial connection.
+     */
+    interface Join extends ClientConnectionEvent {
+    }
+
+    /**
+     * Called after the client authenticates and attempts to login to the server.
+     */
+    interface Login extends ClientConnectionEvent {
+    }
+
+    /**
+     * Called when a Player disconnects from the game.
+     */
+    interface Disconnect extends ClientConnectionEvent {
+
     }
 }
