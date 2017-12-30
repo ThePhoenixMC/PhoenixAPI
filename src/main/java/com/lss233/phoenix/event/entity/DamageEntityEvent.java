@@ -1,12 +1,13 @@
 package com.lss233.phoenix.event.entity;
 
 import com.lss233.phoenix.event.Cancellable;
+import com.lss233.phoenix.event.Event;
 import com.lss233.phoenix.event.cause.entity.DamageModifier;
 
 /**
  * Represents the base event for when an Entity is being "attacked".
  */
-public interface DamageEntityEvent extends Cancellable {
+public interface DamageEntityEvent extends Event, Cancellable {
 
     /**
      * Gets the raw amount of damage caused by the event

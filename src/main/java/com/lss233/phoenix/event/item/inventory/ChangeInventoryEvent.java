@@ -1,6 +1,7 @@
 package com.lss233.phoenix.event.item.inventory;
 
 import com.lss233.phoenix.event.Cancellable;
+import com.lss233.phoenix.event.Event;
 
 /**
  * Represents an event fired when a Living changed its inventory
@@ -10,7 +11,7 @@ import com.lss233.phoenix.event.Cancellable;
  *     <li>item - The item.</li>
  * </ul>
  */
-public interface ChangeInventoryEvent extends Cancellable {
+public interface ChangeInventoryEvent extends Event, Cancellable {
     /**
      * Fired when a Living changes it's equipment.
      */
