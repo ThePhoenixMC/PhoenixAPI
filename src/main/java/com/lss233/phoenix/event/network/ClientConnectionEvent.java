@@ -3,7 +3,13 @@ package com.lss233.phoenix.event.network;
 import com.lss233.phoenix.event.Event;
 
 /**
- *
+ * Represents an event fired during the login process.
+ * The events are fired in the following order:
+ * Auth -> Login -> Join -> Disconnect
+ * Cause:
+ * <ul>
+ * <li> player - the player</li>
+ * </ul>
  */
 public interface ClientConnectionEvent extends Event {
 
