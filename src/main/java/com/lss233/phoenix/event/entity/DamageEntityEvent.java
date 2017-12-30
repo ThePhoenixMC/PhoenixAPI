@@ -23,7 +23,7 @@ public interface DamageEntityEvent extends Event, Cancellable {
 
     /**
      * Gets the damage for the provide {@link com.lss233.phoenix.event.entity.DamageEntityEvent}.
-     * @param damageModifier
+     * @param damageModifier The DamageModifier
      * @return The raw amount of damage caused by the event
      */
     double getDamage(DamageModifier damageModifier);
