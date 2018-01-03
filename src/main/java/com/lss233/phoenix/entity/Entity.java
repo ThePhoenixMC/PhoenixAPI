@@ -7,4 +7,6 @@ import com.lss233.phoenix.Location;
  */
 public interface Entity {
     Location getLocation();
+
+
 }
