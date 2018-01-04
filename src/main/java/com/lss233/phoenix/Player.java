@@ -9,4 +9,6 @@ import com.lss233.phoenix.entity.LivingEntity;
  * .
  */
 public interface Player extends LivingEntity, OfflinePlayer, CommandSender, PluginMessageRecipient {
+
+    
 }
