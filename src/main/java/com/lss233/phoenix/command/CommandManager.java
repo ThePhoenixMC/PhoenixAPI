@@ -1,7 +1,7 @@
 package com.lss233.phoenix.command;
 
 import com.lss233.phoenix.Phoenix;
-import com.lss233.phoenix.Player;
+import com.lss233.phoenix.entity.living.Player;
 import com.lss233.phoenix.module.Module;
 
 import java.lang.reflect.InvocationTargetException;

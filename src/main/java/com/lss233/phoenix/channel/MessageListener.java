@@ -1,6 +1,6 @@
 package com.lss233.phoenix.channel;
 
-import com.lss233.phoenix.Player;
+import com.lss233.phoenix.entity.living.Player;
 
 /**
  * .
