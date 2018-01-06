@@ -1,6 +1,6 @@
 package com.lss233.phoenix.block;
 
-import com.lss233.phoenix.Location;
+import com.lss233.phoenix.world.Location;
 
 /**
  * .

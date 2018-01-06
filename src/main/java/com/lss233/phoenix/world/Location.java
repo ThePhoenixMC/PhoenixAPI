@@ -1,9 +1,9 @@
-package com.lss233.phoenix;
+package com.lss233.phoenix.world;
 
 import java.util.Objects;
 
 /**
- *
+ * A Minecraft location.
  */
 public class Location {
     private World world;
