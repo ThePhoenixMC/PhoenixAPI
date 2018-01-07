@@ -3,7 +3,6 @@ package com.lss233.phoenix.entity;
 import com.lss233.phoenix.utils.Identifiable;
 import com.lss233.phoenix.world.Location;
 import com.lss233.phoenix.world.Locatable;
-import com.sun.istack.internal.Nullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -64,7 +63,7 @@ public interface Entity extends Locatable, Identifiable {
      * @param entity The entity vehicle, or null to dismount
      * @return True if the set was successful
      */
-    boolean setVehicle(@Nullable Entity entity);
+    boolean setVehicle(Entity entity);
 
     /**
      * Gets the entity vehicle that is the base of what ever stack
