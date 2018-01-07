@@ -1,5 +1,6 @@
 package com.lss233.phoenix.entity;
 
+import com.lss233.phoenix.utils.Identifiable;
 import com.lss233.phoenix.world.Location;
 import com.lss233.phoenix.world.Locatable;
 import com.sun.istack.internal.Nullable;
@@ -12,7 +13,7 @@ import java.util.Vector;
 /**
  * An entity is a Minecraft entity.
  */
-public interface Entity extends Locatable {
+public interface Entity extends Locatable, Identifiable {
 
     /**
      * Gets the type of this entity.
