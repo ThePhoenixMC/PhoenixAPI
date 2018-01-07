@@ -6,12 +6,11 @@ import com.lss233.phoenix.module.Module;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static java.util.Arrays.*;
 
 /**
  * .
@@ -145,7 +144,13 @@ public class CommandManager {
                     } else {
                         matcher = vArgPattern.matcher(vArg);
                         if (matcher.find()) {
-                            argumentsMap.set(matcher.group().substring(1, matcher.group().length() - 1), oArg);
+                            String key = matcher.group().substring(1, matcher.group().length() - 1);
+                            if(key.endsWith("...")) { // <key...>
+                                argumentsMap.set(key, Arrays.copyOf(args, args.length - i));
+                            } else {
+                                argumentsMap.set(key, oArg);
+                            }
+
                         }
 
                     }
@@ -160,7 +165,7 @@ public class CommandManager {
                 sender.sendMessage("An error has ");
             }
         }
-        return cmd.onMissHandled(sender, label, argumentsMap);
+        return cmd.onMissHandled(sender, label, args);
     }
 
 }

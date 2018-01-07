@@ -28,6 +28,9 @@ public class ArgumentsMap{
     public double[] getDoubles(String key){
         return ((List<Double>)argsMap.get(key)).stream().mapToDouble(i->i).toArray();
     }
+    public String[] getStrings(String key){
+        return ((List<Object>) argsMap.get(key)).stream().toArray(String[]::new);
+    }
     public boolean getBoolean(String key){
         return (Boolean) argsMap.get(key);
     }
