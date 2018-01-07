@@ -57,7 +57,7 @@ public interface Entity extends Locatable, Identifiable {
      * Gets the entity vehicle that this entity is riding, if available.
      * @return The vehicle entity, if it exists
      */
-    Optional<Vehicle> getVehicle();
+    Optional<Entity> getVehicle();
 
     /**
      * Sets the vehicle entity(the entity that is ridden by this one).
