@@ -146,7 +146,14 @@ public class CommandManager {
                         if (matcher.find()) {
                             String key = matcher.group().substring(1, matcher.group().length() - 1);
                             if(key.endsWith("...")) { // <key...>
-                                argumentsMap.set(key, Arrays.copyOf(args, args.length - i));
+                                String[] dest = new String[args.length - i];
+                                /*
+                                System.arraycopy(args, i, dest, args.length - 1 , dest.length);
+                                */
+                                for (int i1 = i; i1 < args.length; i1++) {
+                                    dest[i1 - i] = args[i1];
+                                }
+                                argumentsMap.set(key, dest);
                             } else {
                                 argumentsMap.set(key, oArg);
                             }
