@@ -1,6 +1,7 @@
 package com.lss233.phoenix.world;
 
 import com.lss233.phoenix.entity.living.Player;
+import com.lss233.phoenix.utils.Identifiable;
 
 import java.util.List;
 import java.util.UUID;
@@ -8,7 +9,7 @@ import java.util.UUID;
 /**
  * A loaded Minecraft world.
  */
-public interface World {
+public interface World extends Identifiable{
 
     /**
      * Gets the name of this world.
@@ -27,6 +28,12 @@ public interface World {
      * @return The UUID of this world.
      */
     UUID getUniqueId();
+
+    /**
+     * Gets the properties of the world.
+     * @return The properties of this world.
+     */
+    WorldProperties getProperties();
 
     boolean equals(Object object);
 }
