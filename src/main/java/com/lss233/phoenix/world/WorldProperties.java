@@ -63,4 +63,18 @@ public interface WorldProperties {
      * @param time The time of day
      */
     void setWorldTime(long time);
+
+    /**
+     * Gets the specified GameRule value.
+     * @param gameRule The name of the GameRule.
+     * @return The GameRule value, if it exists.
+     */
+    String getGameRules(String gameRule);
+
+    /**
+     * Sets the specified GameRule value. If one with this name does not exist, it will be created.
+     * @param key The name of the GameRule.
+     * @param value The value to set the GameRule to.
+     */
+    void setGameRule(String key, String value);
 }
