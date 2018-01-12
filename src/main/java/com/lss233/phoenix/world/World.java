@@ -35,5 +35,7 @@ public interface World extends Identifiable{
      */
     WorldProperties getProperties();
 
-    boolean equals(Object object);
+    default boolean equals(World other){
+        return equals(other);
+    }
 }
