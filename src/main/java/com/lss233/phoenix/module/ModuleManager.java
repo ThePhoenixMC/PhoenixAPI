@@ -24,7 +24,22 @@ public class ModuleManager {
     private List<Module> modules = new ArrayList<>();
     private Logger logger = Phoenix.getServer().getLogger();
 
-    public Module loadModule(File file) throws InvalidModuleException, IOException, ClassNotFoundException {
+    /**
+     * Loads a module from an exist instance.
+     * @param module The module
+     */
+    public void loadModule(Module module) {
+        modules.add(module);
+    }
+
+    /**
+     * Loads a module from a file.
+     * @param file The file.
+     * @return The module.
+     * @throws InvalidModuleException The file is not a valid module.
+     * @throws IOException Failed to load the file.
+     */
+    public Module loadModule(File file) throws InvalidModuleException, IOException {
         if (!file.exists()) {
             throw new InvalidModuleException(new FileNotFoundException(file.getPath() + " does not exist"));
         }
@@ -62,7 +77,20 @@ public class ModuleManager {
         throw new UnsupportedOperationException("Operation not supported.");
     }
 
-    public void initalModule(Module module) {
+    /**
+     * Unloads a module from Phoenix system.
+     * @param module The module.
+     */
+    public void unloadModule(Module module) {
+        disableModule(module);
+        modules.remove(module);
+    }
+
+    /**
+     * Initials a module.
+     * @param module The module.
+     */
+    public void initialModule(Module module) {
         if (!module.getState().equals(Module.State.LOADED)) {
             module.onInitial();
             module.setState(Module.State.LOADED);
@@ -71,6 +99,10 @@ public class ModuleManager {
         }
     }
 
+    /**
+     * Enables a module.
+     * @param module The module.
+     */
     public void enableModule(Module module) {
         if (!module.getState().equals(Module.State.ENABLED)) {
             module.onEnable();
@@ -80,16 +112,22 @@ public class ModuleManager {
         }
     }
 
+    /**
+     * Disables a module.
+     * @param module The module.
+     */
     public void disableModule(Module module) {
         if (!module.getState().equals(Module.State.DISABLED)) {
             module.onDisable();
+            Phoenix.getCommandManager().unregisterCommands(module);
+            Phoenix.getEventManager().unregisterListeners(module);
             module.setState(Module.State.DISABLED);
         } else {
             throw new UnsupportedOperationException("Cannot disable a module twice!");
         }
     }
 
-    public void initalModules() {
+    public void initialModules() {
         for (Module module : modules) {
             enableModule(module);
         }
@@ -99,5 +137,19 @@ public class ModuleManager {
         for (Module module : modules) {
             disableModule(module);
         }
+    }
+
+    /**
+     * Gets the info of a module.
+     * @param module The module.
+     * @return The info.
+     */
+    public static ModuleInfo getModuleInfo(Module module) {
+        ModuleInfo info = new ModuleInfo();
+        PhoenixModule phoenixModule = module.getClass().getAnnotation(PhoenixModule.class);
+        info.setId(phoenixModule.modid());
+        info.setName(phoenixModule.name());
+        info.setVersion(phoenixModule.version());
+        return info;
     }
 }

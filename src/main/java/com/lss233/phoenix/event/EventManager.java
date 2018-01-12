@@ -20,11 +20,41 @@ public class EventManager {
             throw new UnsupportedOperationException("EventManager already defined.");
     }
 
-    public void registerEventListener(EventListener listener, Module module) {
+    /**
+     * Registers a event listener
+     * @param module The module of the listener.
+     * @param listener The listener instance.
+     */
+    public void registerListener(Module module, EventListener listener) {
         listenerMap.computeIfAbsent(module, k -> new ArrayList<>());
         listenerMap.get(module).add(listener);
     }
 
+    /**
+     * Unregisters a event listener.
+     * @param module The module of the ;istener.
+     * @param listener The listener instance.
+     */
+    public void unregisterListener(Module module, EventListener listener) {
+        if(listenerMap.containsKey(module)) {
+            listenerMap.get(module).remove(listener);
+        }
+    }
+
+    /**
+     * Unregister all listeners of a module.
+     * @param module The module.
+     */
+    public void unregisterListeners(Module module) {
+        if(listenerMap.containsKey(module)) {
+            listenerMap.remove(module);
+        }
+    }
+
+    /**
+     * Fire a event.
+     * @param event The instance of the event.
+     */
     public void fire(Event event) {
         for (List<EventListener> eventListeners : listenerMap.values()) {
             eventListeners.forEach((listener -> {

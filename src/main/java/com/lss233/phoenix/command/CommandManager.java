@@ -68,20 +68,37 @@ public class CommandManager {
      * @param module  Register's module
      */
     public void registerCommand(Module module, Command command) {
-        try {
-            // Check
-            if (command.getClass().getAnnotation(PhoenixCommand.class) == null) {
+        if (command.getClass().getAnnotation(PhoenixCommand.class) == null) {
                 throw new UnsupportedOperationException("Command must has PhoenixCommand annotation.");
             }
-            commandMap.computeIfAbsent(module, k -> new ArrayList<>());
-            commandMap.get(module).add(command);
-            Phoenix.getServer().getInterface().registerCommand(command);
-        } catch (UnsupportedOperationException ex) {
-            ex.printStackTrace();
-        }
-
+        commandMap.computeIfAbsent(module, k -> new ArrayList<>());
+        commandMap.get(module).add(command);
+        Phoenix.getServer().getInterface().registerCommand(command);
     }
 
+    /**
+     * Unregister a command.
+     * @param module The module of the command.
+     * @param command The command instance.
+     */
+    public void unregisterCommand(Module module, Command command) {
+        if (command.getClass().getAnnotation(PhoenixCommand.class) == null) {
+            throw new UnsupportedOperationException("Command must has PhoenixCommand annotation.");
+        }
+        if(commandMap.containsKey(module)) {
+            commandMap.get(module).remove(command);
+        }
+    }
+
+    /**
+     * Unregister all commands of a module.
+     * @param module The module.
+     */
+    public void unregisterCommands(Module module){
+        if(commandMap.containsKey(module)) {
+            commandMap.remove(module);
+        }
+    }
     /**
      * Handle command, pass the command to target module.
      *
@@ -146,7 +163,14 @@ public class CommandManager {
                         if (matcher.find()) {
                             String key = matcher.group().substring(1, matcher.group().length() - 1);
                             if(key.endsWith("...")) { // <key...>
-                                argumentsMap.set(key, Arrays.copyOf(args, args.length - i));
+                                String[] dest = new String[args.length - i];
+                                /*
+                                System.arraycopy(args, i, dest, args.length - 1 , dest.length);
+                                */
+                                for (int i1 = i; i1 < args.length; i1++) {
+                                    dest[i1 - i] = args[i1];
+                                }
+                                argumentsMap.set(key, dest);
                             } else {
                                 argumentsMap.set(key, oArg);
                             }

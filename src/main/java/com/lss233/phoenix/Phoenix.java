@@ -55,7 +55,7 @@ public final class Phoenix {
         moduleManager =  new ModuleManager();
 
         getServer().getInterface().loadModules();
-        moduleManager.initalModules();
+        moduleManager.initialModules();
 
         moduleManager.enableModules();
     }
