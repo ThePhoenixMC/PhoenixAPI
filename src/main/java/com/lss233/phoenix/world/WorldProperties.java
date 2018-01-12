@@ -64,6 +64,16 @@ public interface WorldProperties {
      */
     void setWorldTime(long time);
 
+    int getThunderDuration();
+    void setThunderDuration();
+    boolean isThundering();
+    void setThunding();
+
+    int getRainDuration();
+    void setRainDuration();
+    boolean isRaining();
+    void setRaining();
+
     /**
      * Gets the specified GameRule value.
      * @param gameRule The name of the GameRule.
@@ -77,4 +87,10 @@ public interface WorldProperties {
      * @param value The value to set the GameRule to.
      */
     void setGameRule(String key, String value);
+
+    Location getSpawnLocation();
+    void setSpawnLocation();
+
+    WorldBorder getWorldBorderCenter();
+
 }
