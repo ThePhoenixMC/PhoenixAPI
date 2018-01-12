@@ -119,6 +119,8 @@ public class ModuleManager {
     public void disableModule(Module module) {
         if (!module.getState().equals(Module.State.DISABLED)) {
             module.onDisable();
+            Phoenix.getCommandManager().unregisterCommands(module);
+            Phoenix.getEventManager().unregisterListeners(module);
             module.setState(Module.State.DISABLED);
         } else {
             throw new UnsupportedOperationException("Cannot disable a module twice!");
