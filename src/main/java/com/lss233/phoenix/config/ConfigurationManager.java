@@ -7,7 +7,6 @@ import com.lss233.phoenix.module.ModuleManager;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 
 /**
  *
@@ -23,8 +22,8 @@ public class ConfigurationManager {
      * @param module The module.
      * @return The directory.
      */
-    public static Path getConfigurationDirectory(Module module) {
-        return new Path(Phoenix.getServer().getPhoenixDataDir(), "config/" + ModuleManager.getModuleInfo(module).getId());
+    public static File getConfigurationDirectory(Module module) {
+        return new File(Phoenix.getServer().getPhoenixDataDir(), "config/" + ModuleManager.getModuleInfo(module).getId());
     }
 
     /**
@@ -33,7 +32,7 @@ public class ConfigurationManager {
      * @return The config.json file instance.
      */
     public static File getDefaultConfigurationFile(Module module) {
-        return new File(getConfigurationDirectory(module).toFile(), "config.json");
+        return new File(getConfigurationDirectory(module), "config.json");
     }
 
     public static JsonConfiguration getConfig(Module module) throws IOException {
