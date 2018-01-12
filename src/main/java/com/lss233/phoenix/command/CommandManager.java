@@ -68,20 +68,37 @@ public class CommandManager {
      * @param module  Register's module
      */
     public void registerCommand(Module module, Command command) {
-        try {
-            // Check
-            if (command.getClass().getAnnotation(PhoenixCommand.class) == null) {
+        if (command.getClass().getAnnotation(PhoenixCommand.class) == null) {
                 throw new UnsupportedOperationException("Command must has PhoenixCommand annotation.");
             }
-            commandMap.computeIfAbsent(module, k -> new ArrayList<>());
-            commandMap.get(module).add(command);
-            Phoenix.getServer().getInterface().registerCommand(command);
-        } catch (UnsupportedOperationException ex) {
-            ex.printStackTrace();
-        }
-
+        commandMap.computeIfAbsent(module, k -> new ArrayList<>());
+        commandMap.get(module).add(command);
+        Phoenix.getServer().getInterface().registerCommand(command);
     }
 
+    /**
+     * Unregister a command.
+     * @param module The module of the command.
+     * @param command The command instance.
+     */
+    public void unregisterCommand(Module module, Command command) {
+        if (command.getClass().getAnnotation(PhoenixCommand.class) == null) {
+            throw new UnsupportedOperationException("Command must has PhoenixCommand annotation.");
+        }
+        if(commandMap.containsKey(module)) {
+            commandMap.get(module).remove(command);
+        }
+    }
+
+    /**
+     * Unregister all commands of a module.
+     * @param module The module.
+     */
+    public void unregisterCommands(Module module){
+        if(commandMap.containsKey(module)) {
+            commandMap.remove(module);
+        }
+    }
     /**
      * Handle command, pass the command to target module.
      *
