@@ -22,7 +22,7 @@ public class ConfigurationManager {
      * @param module The module.
      * @return The directory.
      */
-    public static File getConfigurationDirectory(Module module) {
+    public File getConfigurationDirectory(Module module) {
         return new File(Phoenix.getServer().getPhoenixDataDir(), "config/" + ModuleManager.getModuleInfo(module).getId());
     }
 
@@ -31,11 +31,17 @@ public class ConfigurationManager {
      * @param module The module.
      * @return The config.json file instance.
      */
-    public static File getDefaultConfigurationFile(Module module) {
+    public File getDefaultConfigurationFile(Module module) {
         return new File(getConfigurationDirectory(module), "config.json");
     }
 
-    public static JsonConfiguration getConfig(Module module) throws IOException {
+    /**
+     * Gets the default config file of the module.
+     * @param module The module.
+     * @return The config instance.
+     * @throws IOException Failed to load config.
+     */
+    public JsonConfiguration getConfig(Module module) throws IOException {
         return JsonConfiguration.load(getDefaultConfigurationFile(module));
     }
 }
