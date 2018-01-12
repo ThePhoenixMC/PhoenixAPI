@@ -4,6 +4,7 @@ import com.lss233.phoenix.channel.ChannelManager;
 import com.lss233.phoenix.channel.MessageListener;
 import com.lss233.phoenix.command.Command;
 import com.lss233.phoenix.command.CommandManager;
+import com.lss233.phoenix.config.ConfigurationManager;
 import com.lss233.phoenix.entity.living.Player;
 import com.lss233.phoenix.event.EventManager;
 import com.lss233.phoenix.logging.Logger;
@@ -22,6 +23,7 @@ public final class Phoenix {
     private static Server server;
     private static ModuleManager moduleManager;
     private static CommandManager commandManager;
+    private static ConfigurationManager configurationManager;
     private static ChannelManager channelManager;
     private static EventManager eventManager;
     private static boolean debugMode = true;
@@ -43,6 +45,8 @@ public final class Phoenix {
         // Init Phoenix
         // / Command
         commandManager = new CommandManager();
+        // / Configuration
+        configurationManager = new ConfigurationManager();
         // / Event
         eventManager = new EventManager();
         // / Channel
@@ -63,6 +67,10 @@ public final class Phoenix {
         return moduleManager;
     }
     public static CommandManager getCommandManager() { return commandManager;}
+
+    public static ConfigurationManager getConfigurationManager() {
+        return configurationManager;
+    }
 
     public static ChannelManager getChannelManager() {
         return channelManager;
