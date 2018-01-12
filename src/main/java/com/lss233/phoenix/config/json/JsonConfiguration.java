@@ -53,4 +53,9 @@ public class JsonConfiguration extends MemoryConfiguration implements FileConfig
         }
 
     }
+
+    @Override
+    public void save() throws IOException {
+        save(this.file);
+    }
 }

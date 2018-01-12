@@ -14,4 +14,6 @@ public interface FileConfiguration extends Configuration, IOable{
      * @throws IOException Failed to load file.
      */
     void reload() throws IOException;
+
+    void save() throws IOException;
 }

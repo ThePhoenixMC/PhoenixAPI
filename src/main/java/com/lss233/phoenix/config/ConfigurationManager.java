@@ -42,6 +42,10 @@ public class ConfigurationManager {
      * @throws IOException Failed to load config.
      */
     public JsonConfiguration getConfig(Module module) throws IOException {
-        return JsonConfiguration.load(getDefaultConfigurationFile(module));
+        File file = getDefaultConfigurationFile(module);
+        if(!file.exists())
+            if(!file.createNewFile())
+                throw new IOException("Failed to create file, check your disk space or something.");
+        return JsonConfiguration.load(file);
     }
 }
