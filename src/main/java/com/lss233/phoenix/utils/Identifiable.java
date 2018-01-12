@@ -1,5 +1,6 @@
 package com.lss233.phoenix.utils;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -11,4 +12,8 @@ public interface Identifiable {
      * @return The {@link UUID}
      */
     UUID getUniqueId();
+
+    default boolean equals(Identifiable other){
+        return other != null && Objects.equals(this.getUniqueId(), other.getUniqueId());
+    }
 }
