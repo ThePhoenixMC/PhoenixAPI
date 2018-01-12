@@ -13,6 +13,9 @@ public class MemoryConfiguration implements ConfigurationSection{
         this.map = map;
     }
 
+    protected MemoryConfiguration() {
+    }
+
     /**
      * If the value for the requested key does
      * not exist but a default value has been

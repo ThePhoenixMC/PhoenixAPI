@@ -21,7 +21,9 @@ public interface IOable {
      * @throws IOException Thrown when the given file cannot be load.
      * @throws IllegalArgumentException Thrown when file is null.
      */
-    void load(File file) throws IOException;
+     static void load(File file) throws IOException{
+
+     }
 
     /**
      * Saves this configuration file to the specified location.

@@ -15,23 +15,21 @@ import java.util.Map;
  */
 public class JsonConfiguration extends MemoryConfiguration implements FileConfiguration{
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private File file;
     private Map<String, Object> map;
 
     public JsonConfiguration(Map<String, Object> map) {
         super(map);
     }
 
-    @Override
-    public void load(File file) throws IOException {
-        try(Reader reader = new InputStreamReader(new FileInputStream(file))){
-            HashMap<String, Object> hashMap = new HashMap<>();
-            hashMap = gson.fromJson(reader, hashMap.getClass());
-            map = hashMap;
-        } catch (Exception ex){
-            Phoenix.getLogger("Phoenix").warn("Cannot load from " + file);
-            throw ex;
-        }
+    public JsonConfiguration(File file) throws IOException {
+        reload();
+    }
 
+    public static JsonConfiguration load(File file) throws IOException {
+        JsonConfiguration configuration = new JsonConfiguration(file);
+        configuration.reload();
+        return configuration;
     }
 
     @Override
@@ -42,5 +40,17 @@ public class JsonConfiguration extends MemoryConfiguration implements FileConfig
             Phoenix.getLogger("Phoenix").warn("Cannot write to " + file);
             throw ex;
         }
+    }
+
+    @Override
+    public void reload() throws IOException {
+        try(Reader reader = new InputStreamReader(new FileInputStream(file))){
+            HashMap<String, Object> hashMap = new HashMap<>();
+            this.map = gson.fromJson(reader, hashMap.getClass());
+        } catch (Exception ex){
+            Phoenix.getLogger("Phoenix").warn("Cannot load from " + file);
+            throw ex;
+        }
+
     }
 }
