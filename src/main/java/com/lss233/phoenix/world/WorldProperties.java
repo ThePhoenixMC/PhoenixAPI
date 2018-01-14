@@ -89,7 +89,7 @@ public interface WorldProperties {
     void setGameRule(String key, String value);
 
     Location getSpawnLocation();
-    void setSpawnLocation();
+    void setSpawnLocation(Location spawnLocation);
 
     WorldBorder getWorldBorderCenter();
 
