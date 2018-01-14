@@ -65,12 +65,12 @@ public interface WorldProperties {
     void setWorldTime(long time);
 
     int getThunderDuration();
-    void setThunderDuration(long thunderDuration);
+    void setThunderDuration(int thunderDuration);
     boolean isThundering();
-    void setThunding(boolean thunding);
+    void setThundering(boolean thundering);
 
     int getRainDuration();
-    void setRainDuration(long rainDuration);
+    void setRainDuration(int rainDuration);
     boolean isRaining();
     void setRaining(boolean raining);
 
