@@ -65,14 +65,14 @@ public interface WorldProperties {
     void setWorldTime(long time);
 
     int getThunderDuration();
-    void setThunderDuration();
+    void setThunderDuration(long thunderDuration);
     boolean isThundering();
-    void setThunding();
+    void setThunding(boolean thunding);
 
     int getRainDuration();
-    void setRainDuration();
+    void setRainDuration(long rainDuration);
     boolean isRaining();
-    void setRaining();
+    void setRaining(boolean raining);
 
     /**
      * Gets the specified GameRule value.
