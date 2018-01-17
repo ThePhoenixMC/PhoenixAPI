@@ -37,6 +37,10 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
         
-      # run tests!
-      - run: mvn integration-test
+      # run tests and install
+      - run: mvn integration-test install
 
+general:
+  artifacts:
+    - "target/*.jar
+    - "target/apidocs"
