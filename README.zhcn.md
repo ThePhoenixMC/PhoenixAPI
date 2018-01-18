@@ -53,15 +53,24 @@ Phoenix 是一个Minecraft服务端插件框架，它可以让你的插件开发
 
 ## 贡献
 
-我们需要开发者协助我们开发**Phoenix**.
+我们需要开发者协助我们开发**Phoenix**,
+您可以通过以下两种方式协助我们:
 
-### 贡献补丁
+### Pull request
 
 1. Fork这个项目.
 2. 创建您的特性分支 (`git checkout -b my-new-feature`).
 3. 提交您的改动 (`git commit -am '修复Bug'`).
 4. 提交您的分支 (`git push origin my-new-feature`).
 5. 创建Pull Request.
+
+### 加入小组
+
+请参考联系方法
+
+## 联系方法
+
+您可以点击[这里](https://t.me/PhoenixMCDev) 加入我们的Telegram群组。
 
 ## 许可
 
