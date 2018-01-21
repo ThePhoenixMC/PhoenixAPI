@@ -65,14 +65,14 @@ public interface WorldProperties {
     void setWorldTime(long time);
 
     int getThunderDuration();
-    void setThunderDuration();
+    void setThunderDuration(int thunderDuration);
     boolean isThundering();
-    void setThunding();
+    void setThundering(boolean thundering);
 
     int getRainDuration();
-    void setRainDuration();
+    void setRainDuration(int rainDuration);
     boolean isRaining();
-    void setRaining();
+    void setRaining(boolean raining);
 
     /**
      * Gets the specified GameRule value.
@@ -89,7 +89,7 @@ public interface WorldProperties {
     void setGameRule(String key, String value);
 
     Location getSpawnLocation();
-    void setSpawnLocation();
+    void setSpawnLocation(Location spawnLocation);
 
     WorldBorder getWorldBorderCenter();
 
