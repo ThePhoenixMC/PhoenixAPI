@@ -64,7 +64,7 @@ public interface WorldBorder {
      * Sets the distance a player may be be outside the world border before taking damage.
      * @param damageThreshold The distance, in blocks.
      */
-    void getDamageBuffer(double damageThreshold);
+    void setDamageThreshold(double damageThreshold);
 
     /**
      * Sets the diameter of the world border.

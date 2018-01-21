@@ -2,6 +2,11 @@
 
 Cross server-side plugin framework.
 
+* TeamCity: <a href="https://ci.lss233.com/viewType.html?buildTypeId=PhoenixFramework_API&guest=1"><img src="https://ci.lss233.com/app/rest/builds/buildType:(id:PhoenixFramework_API)/statusIcon" alt="TC Build"/></a> 
+* Travis CI: [![Build Status](https://travis-ci.org/ThePhoenixMC/PhoenixAPI.svg?branch=master)](https://travis-ci.org/ThePhoenixMC/PhoenixAPI)
+* Circle CI: [![CircleCI](https://circleci.com/gh/ThePhoenixMC/PhoenixAPI.svg?style=svg)](https://circleci.com/gh/ThePhoenixMC/PhoenixAPI)
+
+
 English,[简体中文](README.zhcn.md)
 
 ## What is Phoenix ?
@@ -54,13 +59,22 @@ Add the flowing code to your `pom.xml`:
 
 We will always have a need for developers to help improve Phoenix.
 
-### Contributing A Patch
+### Pull request
 
 1. Fork it.
 2. Create your feature branch (`git checkout -b my-new-feature`).
 3. Commit your changes (`git commit -am 'Add some feature'`).
 4. Push to the branch (`git push origin my-new-feature`).
 5. Create new Pull Request.
+
+
+### Join us
+
+See [Contacting](#Contacting)
+
+## Contacting
+
+Click [here](https://t.me/PhoenixMCDev) to join our Telegram group.
 
 ## Licensing
 
