@@ -12,9 +12,15 @@ import java.io.IOException;
  *
  */
 public class ConfigurationManager {
+    private final File moduleDataDir;
     public ConfigurationManager() {
         if (Phoenix.getConfigurationManager() != null)
             throw new UnsupportedOperationException("ConfigurationManager already defined.");
+        this.moduleDataDir = new File(Phoenix.getServer().getPhoenixDataDir(), "config");
+        if(!moduleDataDir.isDirectory()){
+            if (moduleDataDir.mkdirs())
+                throw new RuntimeException("Failed to create module data directory.");
+        }
     }
 
     /**
@@ -23,7 +29,7 @@ public class ConfigurationManager {
      * @return The directory.
      */
     public File getConfigurationDirectory(Module module) {
-        return new File(Phoenix.getServer().getPhoenixDataDir(), "config/" + ModuleManager.getModuleInfo(module).getId());
+        return new File(moduleDataDir, ModuleManager.getModuleInfo(module).getId());
     }
 
     /**
