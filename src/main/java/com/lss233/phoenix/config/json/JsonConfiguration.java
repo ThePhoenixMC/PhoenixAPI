@@ -22,13 +22,13 @@ public class JsonConfiguration extends MemoryConfiguration implements FileConfig
         super(map);
     }
 
-    public JsonConfiguration(File file) throws IOException {
+    private JsonConfiguration(File file) throws IOException {
+        this.file = file;
         reload();
     }
 
     public static JsonConfiguration load(File file) throws IOException {
         JsonConfiguration configuration = new JsonConfiguration(file);
-        configuration.reload();
         return configuration;
     }
 
