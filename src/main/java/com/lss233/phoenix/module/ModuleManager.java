@@ -129,13 +129,13 @@ public class ModuleManager {
 
     public void initialModules() {
         for (Module module : modules) {
-            enableModule(module);
+            initialModule(module);
         }
     }
 
     public void enableModules() {
         for (Module module : modules) {
-            disableModule(module);
+            enableModule(module);
         }
     }
 
