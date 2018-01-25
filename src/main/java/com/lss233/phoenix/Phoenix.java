@@ -26,6 +26,7 @@ public final class Phoenix {
     private static ConfigurationManager configurationManager;
     private static ChannelManager channelManager;
     private static EventManager eventManager;
+    private final static String PHOENIX_VERSION = "1.0.0";
     private static boolean debugMode = true;
 
     public static Server getServer(){
@@ -82,6 +83,10 @@ public final class Phoenix {
 
     public static boolean getDebugMode() {
         return debugMode;
+    }
+
+    public static String getVersion() {
+        return PHOENIX_VERSION;
     }
 
     /**
