@@ -1,5 +1,7 @@
 package com.lss233.phoenix.world;
 
+import java.util.Optional;
+
 /**
  * Represents the properties of a World which are persisted across runtime instances.
  */
@@ -79,7 +81,7 @@ public interface WorldProperties {
      * @param gameRule The name of the GameRule.
      * @return The GameRule value, if it exists.
      */
-    String getGameRules(String gameRule);
+    Optional<String> getGameRules(String gameRule);
 
     /**
      * Sets the specified GameRule value. If one with this name does not exist, it will be created.
