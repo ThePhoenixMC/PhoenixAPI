@@ -8,12 +8,23 @@ import java.util.Objects;
 public class Location {
     private World world;
     private double x, y, z;
-
-    public Location(World world, double x, double y, double z) {
+    private float yaw, pitch;
+    public Location(World world, double x, double y, double z){
         this.world = world;
         this.x = x;
         this.y = y;
         this.z = z;
+        this.yaw = 0;
+        this.pitch = 0;
+    }
+
+    public Location(World world, double x, double y, double z, float yaw, float pitch) {
+        this.world = world;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.yaw = yaw;
+        this.pitch = pitch;
     }
 
     public World getWorld() {
@@ -60,9 +71,32 @@ public class Location {
         return (int) Math.round(z);
     }
 
+    public float getYaw() {
+        return yaw;
+    }
+
+    public void setYaw(float yaw) {
+        this.yaw = yaw;
+    }
+
+    public float getPitch() {
+        return pitch;
+    }
+
+    public void setPitch(float pitch) {
+        this.pitch = pitch;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(x, y, z);
+        // https://stackoverflow.com/questions/113511/best-implementation-for-hashcode-method
+        int hash = 15;
+        hash = 37 * hash + (int)Double.doubleToLongBits(this.getX());
+        hash = 37 * hash + (int)Double.doubleToLongBits(this.getY());
+        hash = 37 * hash + (int)Double.doubleToLongBits(this.getZ());
+        hash = 37 * hash + Float.floatToIntBits(this.getYaw());
+        hash = 37 * hash + Float.floatToIntBits(this.getPitch());
+        return hash;
     }
 
     @Override
