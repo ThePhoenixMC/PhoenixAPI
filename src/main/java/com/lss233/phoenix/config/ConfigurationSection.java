@@ -17,6 +17,7 @@ public interface ConfigurationSection {
      */
     boolean contains(String key);
 
+
     /**
      * Sets the specified key to the given value.
      * <p>
@@ -29,6 +30,12 @@ public interface ConfigurationSection {
      */
     void set(String key, Object value);
 
+    /**
+     * Sets the specified key to the given section.
+     * @param key The key of the section to set.
+     * @param section New section to set the key to.
+     */
+    void setSection(String key, ConfigurationSection section);
     /**
      * Gets the requested Object by key.
      * @param key Key of the Object to get.
