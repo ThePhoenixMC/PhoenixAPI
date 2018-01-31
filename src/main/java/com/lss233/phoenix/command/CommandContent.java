@@ -8,7 +8,8 @@ import java.util.Map;
 /**
  * .
  */
-public class ArgumentsMap{
+public class CommandContent {
+    private String label = "";
     private Map<String,Object> argsMap = new HashMap<>();
 
     void set(String key,Object value){
@@ -39,5 +40,13 @@ public class ArgumentsMap{
     }
     public Object get(String key){
         return argsMap.get(key);
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public String getLabel() {
+        return label;
     }
 }

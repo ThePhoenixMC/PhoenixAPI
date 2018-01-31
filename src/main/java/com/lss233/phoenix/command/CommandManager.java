@@ -10,8 +10,6 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static java.util.Arrays.*;
-
 /**
  * .
  */
@@ -109,7 +107,8 @@ public class CommandManager {
      */
     public boolean handleCommand(CommandSender sender, String label, String[] args) {
         // Needs improve
-        ArgumentsMap argumentsMap = new ArgumentsMap();
+        CommandContent commandContent = new CommandContent();
+        commandContent.setLabel(label);
 
         Command cmd = getCommand(label);
         CommandRouter router;
@@ -122,7 +121,7 @@ public class CommandManager {
             try {
                 router = method.getAnnotation(CommandRouter.class);
 
-                if (router == null || method.getParameters().length != 3)
+                if (router == null || method.getParameters().length != 2)
                     continue;  // Next method.
                 if (!router.sender().equals(CommandRouter.Sender.ALL))
                     switch (router.sender()) {
@@ -170,9 +169,9 @@ public class CommandManager {
                                 for (int i1 = i; i1 < args.length; i1++) {
                                     dest[i1 - i] = args[i1];
                                 }
-                                argumentsMap.set(key, dest);
+                                commandContent.set(key, dest);
                             } else {
-                                argumentsMap.set(key, oArg);
+                                commandContent.set(key, oArg);
                             }
 
                         }
@@ -183,7 +182,7 @@ public class CommandManager {
                 continue;
             }
             try {
-                return (Boolean) method.invoke(cmd, sender, label, argumentsMap);
+                return (Boolean) method.invoke(cmd, sender, commandContent);
             } catch (IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
                 sender.sendMessage("An error has ");
