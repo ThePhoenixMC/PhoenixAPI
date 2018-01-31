@@ -1,5 +1,11 @@
 package com.lss233.phoenix.module;
 
+import com.lss233.phoenix.Phoenix;
+import com.lss233.phoenix.config.json.JsonConfiguration;
+import com.lss233.phoenix.logging.Logger;
+
+import java.io.IOException;
+
 /**
  *
  *
@@ -24,6 +30,18 @@ public  abstract class Module {
      *  Call when module has been disabled.
     */
     public abstract void onDisable();
+
+    /**
+     * Gets the default logger of this module.
+     * @return The logger
+     */
+    private Logger getLogger() {
+        return Phoenix.getLogger(ModuleManager.getModuleInfo(this).getName());
+    }
+
+    private JsonConfiguration getConfig() throws IOException {
+        return Phoenix.getConfigurationManager().getConfig(this);
+    }
 
     State getState() {
         return state;
