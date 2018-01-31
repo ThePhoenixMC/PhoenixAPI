@@ -3,6 +3,7 @@ package com.lss233.phoenix.config;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -264,6 +265,16 @@ public class MemoryConfiguration implements ConfigurationSection{
     @Override
     public List getList(String key, List def) {
         return contains(key) ? getList(key) : def;
+    }
+
+    /**
+     * Gets the key set of this section.
+     *
+     * @return The key set.
+     */
+    @Override
+    public Set<String> getKeys() {
+        return map.keySet();
     }
 
     /**

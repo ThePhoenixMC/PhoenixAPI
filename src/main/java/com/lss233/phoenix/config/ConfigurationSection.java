@@ -1,6 +1,7 @@
 package com.lss233.phoenix.config;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Represents a section of a {@link Configuration}
@@ -204,6 +205,12 @@ public interface ConfigurationSection {
      * @return Requested List.
      */
     List getList(String key, List def);
+
+    /**
+     * Gets the key set of this section.
+     * @return The key set.
+     */
+    Set<String> getKeys();
 
     /**
      * Gets the requested ConfigurationSection by key, returning a null if not

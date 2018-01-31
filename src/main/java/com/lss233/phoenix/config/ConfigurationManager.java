@@ -29,7 +29,10 @@ public class ConfigurationManager {
      * @return The directory.
      */
     public File getConfigurationDirectory(Module module) {
-        return new File(moduleDataDir, ModuleManager.getModuleInfo(module).getId());
+        File dir = new File(moduleDataDir, ModuleManager.getModuleInfo(module).getId());
+        if(!dir.exists())
+            dir.mkdirs();
+        return dir;
     }
 
     /**
