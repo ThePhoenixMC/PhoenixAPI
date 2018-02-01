@@ -1,9 +1,6 @@
 package com.lss233.phoenix.config;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  *
@@ -44,6 +41,17 @@ public class MemoryConfiguration implements ConfigurationSection{
      */
     @Override
     public void set(String key, Object value) {
+    }
+
+    /**
+     * Sets the specified key to the given section.
+     *
+     * @param key     The key of the section to set.
+     * @param section New section to set the key to.
+     */
+    @Override
+    public void setSection(String key, ConfigurationSection section) {
+        this.map.put(key, ((MemoryConfiguration)section).map);
     }
 
     /**
@@ -287,5 +295,13 @@ public class MemoryConfiguration implements ConfigurationSection{
     @Override
     public ConfigurationSection getSection(String key) {
         return new MemoryConfiguration((Map<String, Object>) get(key));
+    }
+
+    /**
+     * Gets an empty memory configuration section.
+     * @return An empty memory configuration section.
+     */
+    public static MemoryConfiguration empty(){
+        return new MemoryConfiguration(new HashMap<>());
     }
 }
