@@ -18,27 +18,50 @@ public class JsonConfiguration extends MemoryConfiguration implements FileConfig
     private File source;
     private Map<String, Object> map;
 
+    /**
+     * Creates a JsonConfiguration by a map.
+     * @param map The map.
+     */
     public JsonConfiguration(Map<String, Object> map) {
         super(map);
     }
 
+    /**
+     * Creates a JsonConfiguration by a file.
+     * @param source The file.
+     * @throws IOException Failed to load config from the file.
+     */
     private JsonConfiguration(File source) throws IOException {
         this.source = source;
         reload();
     }
 
+    /**
+     * Loads config from disk.
+     * @param source The source of the file.
+     * @return Config instance.
+     * @throws IOException Failed to load file.
+     */
     public static JsonConfiguration load(File source) throws IOException {
-        JsonConfiguration configuration = new JsonConfiguration(source);
-        return configuration;
+        return new JsonConfiguration(source);
     }
 
+    /**
+     * Creates a new empty {@link JsonConfiguration} instance.
+     * @return A new empty {@link JsonConfiguration} instance.
+     */
     public static JsonConfiguration empty(){
         return new JsonConfiguration(new HashMap<>());
     }
 
 
+    /**
+     * Saves current configs to a specify file.
+     * @param source The target file.
+     * @throws IOException Failed to save file.
+     */
     @Override
-    public void save(File source) throws IOException, IllegalArgumentException {
+    public void save(File source) throws IOException {
         try(Writer writer = new OutputStreamWriter(new FileOutputStream(source))){
             gson.toJson(map, writer);
         } catch(IOException ex){
@@ -47,6 +70,10 @@ public class JsonConfiguration extends MemoryConfiguration implements FileConfig
         }
     }
 
+    /**
+     * Reload configuration from file.
+     * @throws IOException Failed to load file.
+     */
     @Override
     public void reload() throws IOException {
         try(Reader reader = new InputStreamReader(new FileInputStream(source))){
@@ -59,6 +86,10 @@ public class JsonConfiguration extends MemoryConfiguration implements FileConfig
 
     }
 
+    /**
+     * Saves current configs to file.
+     * @throws IOException Failed to save file.
+     */
     @Override
     public void save() throws IOException {
         save(this.source);
