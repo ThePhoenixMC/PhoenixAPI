@@ -18,7 +18,7 @@ public class ConfigurationManager {
             throw new UnsupportedOperationException("ConfigurationManager already defined.");
         this.moduleDataDir = new File(Phoenix.getServer().getPhoenixDataDir(), "config");
         if(!moduleDataDir.isDirectory()){
-            if (moduleDataDir.mkdirs())
+            if (!moduleDataDir.mkdirs())
                 throw new RuntimeException("Failed to create module data directory.");
         }
     }

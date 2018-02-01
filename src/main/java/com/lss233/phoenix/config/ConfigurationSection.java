@@ -1,5 +1,6 @@
 package com.lss233.phoenix.config;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -227,4 +228,10 @@ public interface ConfigurationSection {
      */
     ConfigurationSection getSection(String key);
 
+    /**
+     * Add a new empty section.
+     * @param key The key of the section to add.
+     * @return The new section.
+     */
+    ConfigurationSection addSection(String key);
 }
