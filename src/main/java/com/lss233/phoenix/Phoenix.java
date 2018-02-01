@@ -15,6 +15,8 @@ import com.lss233.phoenix.world.World;
 
 import java.io.File;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * .
@@ -100,11 +102,27 @@ public final class Phoenix {
         String getServerId();
 
         int getMaxPlayers();
+
+        @Deprecated
         int getViewDistance();
 
         boolean hasAllowNether();
         boolean hasWhitelist();
         boolean hasGenerateStructures();
+
+        default Optional<World> getWorld(String worldName){
+            return getWorlds().stream().filter(world -> world.getName().equalsIgnoreCase(worldName)).findFirst();
+        }
+        default Optional<World> getWorld(UUID uniqueId){
+            return getWorlds().stream().filter(world -> world.getUniqueId().equals(uniqueId)).findFirst();
+        }
+
+        default Optional<Player> getPlayer(String playerName){
+            return getOnlinePlayers().stream().filter(player -> player.getName().equalsIgnoreCase(playerName)).findFirst();
+        }
+        default Optional<Player> getPlayer(UUID uniqueId){
+            return getOnlinePlayers().stream().filter(player -> player.getUniqueId().equals(uniqueId)).findFirst();
+        }
 
         List<World> getWorlds();
         List<Player> getOnlinePlayers();
