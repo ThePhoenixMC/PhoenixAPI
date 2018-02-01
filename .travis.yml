@@ -1,3 +1,18 @@
 language: java
 sudo: false
-script: mvn clean install
+before_install:
+  - chmod +x mvnw
+after_success:
+  - .utility/initiate-publish.sh
+cache:
+  directories:
+  - "$HOME/.cache"
+
+secure: "QV7+W6aPdKltw5hbayHRH0eRgiB+HOcnO33FENNAfGKBHDaSQGDdBYTlGmz1mFgah3jtWZia8uk4gpQeX7Y55kBhAuqoBcpbl9WxkKJbyDvw/TnaRuie1kVa76wmz5fc3cXM5jJNcVLQJ5fZsNqz4STwkq+TrravM7HhkXYaAhlrPwgsj82zCRF7MlP9YpHmhVFG2FwV3W9wLRnPeUBqyZxrjbQx7pvmRhsA/XabXHMPGodPJrPC0EqgtJsNLXdvigIb1sLQCkqOP9ewdplBIOSYmzlUxatjxPkmzz87ZiaBYtIitlQ5BkATzuV1DfIVXgwqGr8RJIsUnjhVgYY8omhJHkkZGS8kvVNwqqba+erWuKIi7Sv119+AG12DUyLc/4g14cjy3BVYc6FIIyhP2Vd9I+K1qzvS+1xXCpfeITVnf7HG+hXWWLK0rpYSC05rRysuhLEo6/SkWuVEkA/O5sobejgCRItPJ6uxvMvTyDCArbVhhcRhDPcodmb7eUFvSl0/FFsI9Jk42TWHD4UO4m+QpTYalv7ORtM/M2UDA8z57wcV1Fw85GXhpK1LZt9RlE86ptn6RsFmtR/4g99wZVD87AMLuAU/3TFE4/H6LfM9xyXIckJh5XllXB0DVY0xWrFDJFOt+LYxdWw0oJ66NaqIwL/xw+IICrGcMUCLZtM="
+
+deploy:
+  provider: script
+  script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn deploy"
+  skip_cleanup: true
+  on:
+    tags: true
