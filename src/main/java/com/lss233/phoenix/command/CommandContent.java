@@ -49,4 +49,8 @@ public class CommandContent {
     public String getLabel() {
         return label;
     }
+
+    void clearContent() {
+        argsMap.clear();
+    }
 }
