@@ -117,12 +117,15 @@ public class CommandManager {
 
         if (cmd == null)
             return false;
+        if(args.length == 0)
+            return cmd.onRoot(sender, commandContent);
         for (Method method : cmd.getClass().getMethods()) {
             try {
                 router = method.getAnnotation(CommandRouter.class);
 
                 if (router == null || method.getParameters().length != 2)
                     continue;  // Next method.
+                commandContent.clearContent();
                 if (!router.sender().equals(CommandRouter.Sender.ALL))
                     switch (router.sender()) {
                         case Player:
@@ -139,7 +142,6 @@ public class CommandManager {
                             if (!(sender instanceof RemoteConsoleCommandSender))
                                 continue;
                     }
-
                 String[] vArgs = router.args().split(" ");
                 if (args.length > vArgs.length && !router.args().endsWith("...]") && !router.args().endsWith("...>"))
                     continue;
@@ -166,9 +168,12 @@ public class CommandManager {
                                 /*
                                 System.arraycopy(args, i, dest, args.length - 1 , dest.length);
                                 */
+                                /*
                                 for (int i1 = i; i1 < args.length; i1++) {
                                     dest[i1 - i] = args[i1];
                                 }
+                                 */
+                                System.arraycopy(args, i, dest, 0, args.length - i);
                                 commandContent.set(key, dest);
                             } else {
                                 commandContent.set(key, oArg);
@@ -188,7 +193,7 @@ public class CommandManager {
                 sender.sendMessage("An error has ");
             }
         }
-        return cmd.onMissHandled(sender, label, args);
+        return cmd.onMissHandled(sender, commandContent);
     }
 
 }
