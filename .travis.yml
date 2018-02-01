@@ -3,7 +3,7 @@ sudo: false
 before_install:
   - chmod +x mvnw
 after_success:
-  - .utility/initiate-publish.sh
+  - .utility/push-javadoc-to-gh-pages.sh
 cache:
   directories:
   - "$HOME/.cache"
@@ -14,5 +14,3 @@ deploy:
   provider: script
   script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn deploy"
   skip_cleanup: true
-  on:
-    tags: true
