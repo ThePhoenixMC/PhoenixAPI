@@ -129,13 +129,34 @@ public class ModuleManager {
 
     public void initialModules() {
         for (Module module : modules) {
-            initialModule(module);
+            try {
+                initialModule(module);
+            } catch (Exception|Error throwable){
+                logger.warn("Failed to initial " + getModuleInfo(module).getName());
+                throwable.printStackTrace();
+            }
         }
     }
 
     public void enableModules() {
         for (Module module : modules) {
-            enableModule(module);
+            try {
+                enableModule(module);
+            } catch (Exception|Error throwable){
+                logger.warn("Failed to enable " + getModuleInfo(module).getName());
+                throwable.printStackTrace();
+            }
+        }
+    }
+
+    public void disableModules(){
+        for (Module module : modules) {
+            try {
+                disableModule(module);
+            } catch (Exception|Error throwable){
+                logger.warn("Failed to disable " + getModuleInfo(module).getName());
+                throwable.printStackTrace();
+            }
         }
     }
 
