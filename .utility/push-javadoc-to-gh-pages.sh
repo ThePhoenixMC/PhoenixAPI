@@ -9,7 +9,7 @@ if [ "$TRAVIS_REPO_SLUG" == "ThePhoenixMC/PhoenixAPI" ] && [ "$TRAVIS_PULL_REQUE
   cd $HOME
   git config --global user.email "travis@travis-ci.org"
   git config --global user.name "travis-ci"
-  git clone --quiet https://$GH_TOKEN@ThePhoenixMC/ThePhoenixMC.github.io.git gh-pages > /dev/null
+  git clone --quiet https://$GH_TOKEN@github.com/ThePhoenixMC/ThePhoenixMC.github.io.git gh-pages > /dev/null
 
   cd gh-pages
   git rm -rf ./javadoc
