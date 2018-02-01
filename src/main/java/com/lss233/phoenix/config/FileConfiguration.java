@@ -16,4 +16,10 @@ public interface FileConfiguration extends Configuration, IOable{
     void reload() throws IOException;
 
     void save() throws IOException;
+
+    void setSource(File source);
+
+    File getSource();
+
+
 }

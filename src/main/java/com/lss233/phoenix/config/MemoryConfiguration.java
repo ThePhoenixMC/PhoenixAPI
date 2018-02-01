@@ -298,6 +298,19 @@ public class MemoryConfiguration implements ConfigurationSection{
     }
 
     /**
+     * Add a new empty section.
+     *
+     * @param key The key of the section to add.
+     * @return The new section.
+     */
+    @Override
+    public ConfigurationSection addSection(String key) {
+        ConfigurationSection section = empty();
+        setSection(key, section);
+        return section;
+    }
+
+    /**
      * Gets an empty memory configuration section.
      * @return An empty memory configuration section.
      */
