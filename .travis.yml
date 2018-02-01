@@ -2,6 +2,7 @@ language: java
 sudo: false
 before_install:
   - chmod +x mvnw
+  - chmod -R +x .utility
 after_success:
   - .utility/push-javadoc-to-gh-pages.sh
 cache:
