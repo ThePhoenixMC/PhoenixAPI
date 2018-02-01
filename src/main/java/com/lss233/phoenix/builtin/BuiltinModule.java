@@ -2,6 +2,7 @@ package com.lss233.phoenix.builtin;
 
 import com.lss233.phoenix.Phoenix;
 import com.lss233.phoenix.builtin.commands.PhoenixCommandExecutor;
+import com.lss233.phoenix.builtin.listener.PhoenixEventListener;
 import com.lss233.phoenix.module.Module;
 import com.lss233.phoenix.module.PhoenixModule;
 
@@ -17,7 +18,7 @@ public class BuiltinModule extends Module{
 
     @Override
     public void onEnable() {
-
+        Phoenix.getEventManager().registerListener(this, new PhoenixEventListener());
     }
 
     @Override
