@@ -6,7 +6,10 @@ import com.lss233.phoenix.module.Module;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -67,8 +70,8 @@ public class CommandManager {
      */
     public void registerCommand(Module module, Command command) {
         if (command.getClass().getAnnotation(PhoenixCommand.class) == null) {
-                throw new UnsupportedOperationException("Command must has PhoenixCommand annotation.");
-            }
+            throw new UnsupportedOperationException("Command must has PhoenixCommand annotation.");
+        }
         commandMap.computeIfAbsent(module, k -> new ArrayList<>());
         commandMap.get(module).add(command);
         Phoenix.getServer().getInterface().registerCommand(command);
@@ -76,27 +79,57 @@ public class CommandManager {
 
     /**
      * Unregister a command.
-     * @param module The module of the command.
+     *
+     * @param module  The module of the command.
      * @param command The command instance.
      */
     public void unregisterCommand(Module module, Command command) {
         if (command.getClass().getAnnotation(PhoenixCommand.class) == null) {
             throw new UnsupportedOperationException("Command must has PhoenixCommand annotation.");
         }
-        if(commandMap.containsKey(module)) {
+        if (commandMap.containsKey(module)) {
             commandMap.get(module).remove(command);
         }
     }
 
     /**
      * Unregister all commands of a module.
+     *
      * @param module The module.
      */
-    public void unregisterCommands(Module module){
-        if(commandMap.containsKey(module)) {
+    public void unregisterCommands(Module module) {
+        if (commandMap.containsKey(module)) {
             commandMap.remove(module);
         }
     }
+
+    private boolean validCommandArugmentsLength(CommandRouter router, String[] args) {
+        String[] vArgs = router.args().split(" ");
+        return args.length > vArgs.length && !router.args().endsWith("...]") && !router.args().endsWith("...>");
+
+    }
+
+    private boolean validCommandSender(CommandRouter router, CommandSender sender) {
+        if (!router.sender().equals(CommandRouter.Sender.ALL))
+            switch (router.sender()) {
+                case Player:
+                    if (!(sender instanceof Player))
+                        return false;
+                    break;
+                case Block:
+                    if (!(sender instanceof BlockCommandSender))
+                        return false;
+                case Console:
+                    if (!(sender instanceof ConsoleCommandSender))
+                        return false;
+                case RemoteConsole:
+                    if (!(sender instanceof RemoteConsoleCommandSender))
+                        return false;
+                    break;
+            }
+        return true;
+    }
+
     /**
      * Handle command, pass the command to target module.
      *
@@ -105,95 +138,78 @@ public class CommandManager {
      * @param args   Command arguments
      * @return Whether the command was successfully handled.
      */
-    public boolean handleCommand(CommandSender sender, String label, String[] args) {
+    public CommandResult handleCommand(CommandSender sender, String label, String[] args) {
         // Needs improve
         CommandContent commandContent = new CommandContent();
         commandContent.setLabel(label);
 
         Command cmd = getCommand(label);
-        CommandRouter router;
+        CommandResult.Builder commandResult = CommandResult.builder();
+        CommandRouter[] routers;
         Matcher matcher;
         String vArg, oArg;
 
         if (cmd == null)
-            return false;
-        if(args.length == 0)
+            return CommandResult.notFound();
+        if (args.length == 0)
             return cmd.onRoot(sender, commandContent);
         for (Method method : cmd.getClass().getMethods()) {
-            try {
-                router = method.getAnnotation(CommandRouter.class);
+            routers = method.getDeclaredAnnotationsByType(CommandRouter.class);
+            if (routers.length == 0 || method.getParameters().length != 2)
+                continue;  // Next method.
+            for (CommandRouter router : routers) {
+                try {
+                    commandContent.clearContent();
+                    if (!(
+                            validCommandSender(router, sender) &&
+                                    validCommandArugmentsLength(router, args)
+                    ))
+                        continue;
+                /*
+                   Syntax:
+                   * Variable:
+                   * * [var] - Option
+                   * * <var> - Required
+                   * * var - Path
+                    */
+                    String[] vArgs = router.args().split(" ");
+                    for (int i = 0; i < vArgs.length; i++) {
+                        vArg = vArgs[i];
+                        oArg = args[i];
+                        if (!(vArg.matches("^\\[(.+)]$") || vArg.matches("^<(.+)>$"))) {
+                            if (!vArg.equalsIgnoreCase(oArg))
+                                throw new MethodNotMatchException();
 
-                if (router == null || method.getParameters().length != 2)
-                    continue;  // Next method.
-                commandContent.clearContent();
-                if (!router.sender().equals(CommandRouter.Sender.ALL))
-                    switch (router.sender()) {
-                        case Player:
-                            if (!(sender instanceof Player))
-                                continue;
-                            break;
-                        case Block:
-                            if (!(sender instanceof BlockCommandSender))
-                                continue;
-                        case Console:
-                            if (!(sender instanceof ConsoleCommandSender))
-                                continue;
-                        case RemoteConsole:
-                            if (!(sender instanceof RemoteConsoleCommandSender))
-                                continue;
-                    }
-                String[] vArgs = router.args().split(" ");
-                if (args.length > vArgs.length && !router.args().endsWith("...]") && !router.args().endsWith("...>"))
-                    continue;
-            /*
-               Syntax:
-               * Variable:
-               * * [var] - Option
-               * * <var> - Required
-               * * var - Path
-                */
-                for (int i = 0; i < vArgs.length; i++) {
-                    vArg = vArgs[i];
-                    oArg = args[i];
-                    if (!(vArg.matches("^\\[(.+)]$") || vArg.matches("^<(.+)>$"))) {
-                        if (!vArg.equalsIgnoreCase(oArg))
-                            throw new MethodNotMatchException();
-
-                    } else {
-                        matcher = vArgPattern.matcher(vArg);
-                        if (matcher.find()) {
-                            String key = matcher.group().substring(1, matcher.group().length() - 1);
-                            if(key.endsWith("...")) { // <key...>
-                                String[] dest = new String[args.length - i];
-                                /*
-                                System.arraycopy(args, i, dest, args.length - 1 , dest.length);
-                                */
-                                /*
-                                for (int i1 = i; i1 < args.length; i1++) {
-                                    dest[i1 - i] = args[i1];
+                        } else {
+                            matcher = vArgPattern.matcher(vArg);
+                            if (matcher.find()) {
+                                String key = matcher.group().substring(1, matcher.group().length() - 1);
+                                if (key.endsWith("...")) { // <key...>
+                                    String[] dest = new String[args.length - i];
+                                    System.arraycopy(args, i, dest, 0, args.length - i);
+                                    commandContent.set(key, dest);
+                                } else {
+                                    commandContent.set(key, oArg);
                                 }
-                                 */
-                                System.arraycopy(args, i, dest, 0, args.length - i);
-                                commandContent.set(key, dest);
-                            } else {
-                                commandContent.set(key, oArg);
+
                             }
 
                         }
-
                     }
+                    commandResult = commandResult.append((CommandResult) method.invoke(cmd, sender, commandContent));
+                    if(router.last())
+                        return commandResult.build();
+                } catch (MethodNotMatchException | ArrayIndexOutOfBoundsException ignored) {
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    sender.sendMessage("Failed to execute this command.");
+                    e.printStackTrace();
                 }
-            } catch (MethodNotMatchException | ArrayIndexOutOfBoundsException ex) {
-                continue;
-            }
-            try {
-                return (Boolean) method.invoke(cmd, sender, commandContent);
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-                sender.sendMessage("An error has ");
             }
         }
-        return cmd.onMissHandled(sender, commandContent);
+        if(commandResult.getSuccessCount() <= 0)
+            return cmd.onMissHandled(sender, commandContent);
+        else
+            return commandResult.build();
     }
 
 }
