@@ -7,12 +7,12 @@ import java.io.File;
 /**
  *
  */
-public class FlatfileDriver implements ORMDriver {
-    File dbFolder = new File(Phoenix.getServer().getPhoenixDataDir(), "db");
+public class FlatFileDriver implements ORMDriver {
+    private File dbFolder = new File(Phoenix.getServer().getPhoenixDataDir(), "db");
 
     @Override
     public String getName() {
-        return "Flatfile";
+        return "FlatFile";
     }
 
     @Override

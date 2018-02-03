@@ -16,7 +16,7 @@ import java.util.Map;
 public class JsonConfiguration extends MemoryConfiguration implements FileConfiguration{
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private File source;
-    private Map<String, Object> map;
+    private HashMap<String, Object> map;
 
     /**
      * Creates a JsonConfiguration by a map.
@@ -77,8 +77,7 @@ public class JsonConfiguration extends MemoryConfiguration implements FileConfig
     @Override
     public void reload() throws IOException {
         try(Reader reader = new InputStreamReader(new FileInputStream(source))){
-            HashMap<String, Object> hashMap = new HashMap<>();
-            this.map = gson.fromJson(reader, hashMap.getClass());
+            this.map = gson.fromJson(reader, this.map.getClass());
         } catch (Exception ex){
             Phoenix.getLogger("Phoenix").warn("Cannot load from " + source);
             throw ex;

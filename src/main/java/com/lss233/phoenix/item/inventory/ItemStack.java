@@ -24,7 +24,7 @@ public interface ItemStack extends ValueContainer {
                 getValues().equals(itemStack.getValues());
     }
 
-    public class Builder {
+    class Builder {
         ItemType itemType;
         int quantity = 100;
         Map<DataKey, Object> data = new HashMap<>();

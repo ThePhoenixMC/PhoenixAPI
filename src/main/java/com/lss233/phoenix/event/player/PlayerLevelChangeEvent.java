@@ -1,6 +1,5 @@
 package com.lss233.phoenix.event.player;
 
-import com.lss233.phoenix.event.Cancellable;
 import com.lss233.phoenix.event.Event;
 
 /**
