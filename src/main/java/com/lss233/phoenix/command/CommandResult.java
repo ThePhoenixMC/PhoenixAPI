@@ -4,15 +4,16 @@ package com.lss233.phoenix.command;
  *
  */
 public class CommandResult {
-    private final int affectedBlocks,affectedEntities,affectedItems,successCount,queryResult;
+    private final int affectedBlocks,affectedEntities,affectedItems,successCount,queryResult,invokedExecutors;
     private final Reason reason;
 
-    private CommandResult(int affectedBlocks, int affectedEntities, int affectedItems, int successCount, int queryResult, Reason reason) {
+    private CommandResult(int affectedBlocks, int affectedEntities, int affectedItems, int successCount, int queryResult,int invokedExecutors, Reason reason) {
         this.affectedBlocks = affectedBlocks;
         this.affectedEntities = affectedEntities;
         this.affectedItems = affectedItems;
         this.successCount = successCount;
         this.queryResult = queryResult;
+        this.invokedExecutors = invokedExecutors;
         this.reason = reason;
     }
 
@@ -56,6 +57,13 @@ public class CommandResult {
         return queryResult;
     }
 
+    /**
+     * Gets the count of invoked executors of this command.
+     * @return The count of invoked exectuors
+     */
+    public int getInvokedExecutors() {
+        return invokedExecutors;
+    }
     public static CommandResult.Builder builder() {
         return new Builder();
     }
@@ -73,7 +81,7 @@ public class CommandResult {
 
     /**
      * Returns a result indicating the command was processed without affects.
-     * @return
+     * @return The command result.
      */
     public static CommandResult success() {
         return new Builder().build();
@@ -106,11 +114,25 @@ public class CommandResult {
     }
 
     public static class Builder {
-        int affectedBlocks = 0,affectedEntities = 0,affectedItems = 0,successCount = 1, queryResult = 0;
+        int affectedBlocks = 0;
+        int affectedEntities = 0;
+        int affectedItems = 0;
+        int successCount = 0;
+        int invokedExecutors = 0;
+        int queryResult = 0;
+
+        public int getInvokedExecutors() {
+            return invokedExecutors;
+        }
+
+        public Builder setInvokedExecutors(int invokedExecutors) {
+            this.invokedExecutors = invokedExecutors;
+            return this;
+        }
         Reason reason = Reason.NONE;
 
         public CommandResult build(){
-            return new CommandResult(affectedBlocks, affectedEntities, affectedItems, successCount, queryResult, reason);
+            return new CommandResult(affectedBlocks, affectedEntities, affectedItems, successCount, queryResult, invokedExecutors, reason);
         }
 
         public Reason getReason() {
@@ -128,6 +150,7 @@ public class CommandResult {
             affectedItems += commandResult.getAffectedItems();
             affectedBlocks += commandResult.getAffectedBlocks();
             affectedEntities += commandResult.getAffectedEntities();
+            invokedExecutors ++;
             return this;
         }
 

@@ -103,9 +103,9 @@ public class CommandManager {
         }
     }
 
-    private boolean validCommandArugmentsLength(CommandRouter router, String[] args) {
+    private boolean validCommandArgumentsLength(CommandRouter router, String[] args) {
         String[] vArgs = router.args().split(" ");
-        return args.length > vArgs.length && !router.args().endsWith("...]") && !router.args().endsWith("...>");
+        return !(args.length > vArgs.length && !router.args().endsWith("...]") && !router.args().endsWith("...>"));
 
     }
 
@@ -147,6 +147,7 @@ public class CommandManager {
         CommandResult.Builder commandResult = CommandResult.builder();
         CommandRouter[] routers;
         Matcher matcher;
+        String[] vArgs;
         String vArg, oArg;
 
         if (cmd == null)
@@ -162,7 +163,8 @@ public class CommandManager {
                     commandContent.clearContent();
                     if (!(
                             validCommandSender(router, sender) &&
-                                    validCommandArugmentsLength(router, args)
+                                    validCommandArgumentsLength(router, args) &&
+                                    validCommandPath(router, args)
                     ))
                         continue;
                 /*
@@ -172,15 +174,11 @@ public class CommandManager {
                    * * <var> - Required
                    * * var - Path
                     */
-                    String[] vArgs = router.args().split(" ");
+                    vArgs = router.args().split(" ");
                     for (int i = 0; i < vArgs.length; i++) {
                         vArg = vArgs[i];
                         oArg = args[i];
-                        if (!(vArg.matches("^\\[(.+)]$") || vArg.matches("^<(.+)>$"))) {
-                            if (!vArg.equalsIgnoreCase(oArg))
-                                throw new MethodNotMatchException();
-
-                        } else {
+                        if (vArg.matches("^\\[(.+)]$") || vArg.matches("^<(.+)>$")) {
                             matcher = vArgPattern.matcher(vArg);
                             if (matcher.find()) {
                                 String key = matcher.group().substring(1, matcher.group().length() - 1);
@@ -196,20 +194,31 @@ public class CommandManager {
 
                         }
                     }
-                    commandResult = commandResult.append((CommandResult) method.invoke(cmd, sender, commandContent));
-                    if(router.last())
+                    commandResult.append((CommandResult) method.invoke(cmd, sender, commandContent));
+                    if (router.last())
                         return commandResult.build();
-                } catch (MethodNotMatchException | ArrayIndexOutOfBoundsException ignored) {
+                } catch (ArrayIndexOutOfBoundsException ignored) {
                 } catch (IllegalAccessException | InvocationTargetException e) {
                     sender.sendMessage("Failed to execute this command.");
                     e.printStackTrace();
                 }
             }
         }
-        if(commandResult.getSuccessCount() <= 0)
+        if (commandResult.getInvokedExecutors() <= 0)
             return cmd.onMissHandled(sender, commandContent);
         else
             return commandResult.build();
+    }
+
+    private boolean validCommandPath(CommandRouter router, String[] args) {
+        String[] vArgs = router.args().split(" ");
+        for (int i = 0; i < vArgs.length; i++) {
+            if (vArgs[i].matches("^\\[(.+)]$") || vArgs[i].matches("^<(.+)>$"))
+                continue;
+            if (!vArgs[i].equalsIgnoreCase(args[i]))
+                return false;
+        }
+        return true;
     }
 
 }
