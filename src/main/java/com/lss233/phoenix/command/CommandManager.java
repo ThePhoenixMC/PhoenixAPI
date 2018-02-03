@@ -104,8 +104,7 @@ public class CommandManager {
     }
 
     private boolean validCommandArgumentsLength(CommandRouter router, String[] args) {
-        String[] vArgs = router.args().split(" ");
-        return !(args.length > vArgs.length && !router.args().endsWith("...]") && !router.args().endsWith("...>"));
+        return router.args().endsWith("...>") || router.args().endsWith("...]") || args.length == router.args().split(" ").length;
 
     }
 
@@ -161,10 +160,11 @@ public class CommandManager {
             for (CommandRouter router : routers) {
                 try {
                     commandContent.clearContent();
+                    vArgs = router.args().split(" ");
                     if (!(
                             validCommandSender(router, sender) &&
                                     validCommandArgumentsLength(router, args) &&
-                                    validCommandPath(router, args)
+                                    validCommandPath(vArgs, args)
                     ))
                         continue;
                 /*
@@ -174,11 +174,10 @@ public class CommandManager {
                    * * <var> - Required
                    * * var - Path
                     */
-                    vArgs = router.args().split(" ");
                     for (int i = 0; i < vArgs.length; i++) {
                         vArg = vArgs[i];
                         oArg = args[i];
-                        if (vArg.matches("^\\[(.+)]$") || vArg.matches("^<(.+)>$")) {
+                        if (vArg.matches("^<(.+)>|\\[(.+)]$")) {
                             matcher = vArgPattern.matcher(vArg);
                             if (matcher.find()) {
                                 String key = matcher.group().substring(1, matcher.group().length() - 1);
@@ -210,10 +209,9 @@ public class CommandManager {
             return commandResult.build();
     }
 
-    private boolean validCommandPath(CommandRouter router, String[] args) {
-        String[] vArgs = router.args().split(" ");
+    private boolean validCommandPath(String[] vArgs, String[] args) {
         for (int i = 0; i < vArgs.length; i++) {
-            if (vArgs[i].matches("^\\[(.+)]$") || vArgs[i].matches("^<(.+)>$"))
+            if (vArgs[i].matches("^\\[(.+)]|<(.+)>$"))
                 continue;
             if (!vArgs[i].equalsIgnoreCase(args[i]))
                 return false;
