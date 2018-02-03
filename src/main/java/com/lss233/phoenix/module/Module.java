@@ -17,7 +17,7 @@ public  abstract class Module {
     private State state = State.UNLOADED;
 
     /**
-     * Call when module has been initaled.
+     * Call when module has been initialized.
      */
     public abstract void onInitial();
     

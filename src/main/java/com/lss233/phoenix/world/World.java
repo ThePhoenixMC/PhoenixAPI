@@ -36,6 +36,6 @@ public interface World extends Identifiable{
     WorldProperties getProperties();
 
     default boolean equals(World other){
-        return equals(other);
+        return this.equals((Identifiable)other);
     }
 }

@@ -10,7 +10,7 @@ public enum ItemKeys {
     ITEM_LORE(new DataKey("item lore"));
 
     private DataKey dataKey;
-    private ItemKeys(DataKey dataKey) {
+    ItemKeys(DataKey dataKey) {
         this.dataKey = dataKey;
     }
 
