@@ -12,18 +12,20 @@ import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
  */
 public class Block {
 
+    private Builder builder;
     private UUID creator;
     private BlockState blockState;
     private Location blockLocation;
 
-    public Block(Builder builder) {
+    private Block(Builder builder) {
+        this.builder = builder;
         this.blockState = checkNotNull(builder.blockState);
         this.blockLocation = checkNotNull(builder.location);
         this.creator = builder.creator;
     }
 
     public Optional<UUID> getCreator() {
-        return Optional.ofNullable( creator);
+        return Optional.ofNullable(creator);
     }
 
     public BlockState getBlockState() {
@@ -34,9 +36,20 @@ public class Block {
         return blockLocation;
     }
 
-    public boolean restore(boolean force){
-        //TODO
-        return true;
+    public boolean restore(boolean force) {
+        return blockLocation.getWorld().setBlock(this, force);
+    }
+
+    public Block withLocation(Location location) {
+        return builder.location(location).build();
+    }
+
+    public Block withCreator(UUID creator) {
+        return builder.creator(creator).build();
+    }
+
+    public Builder getBuilder() {
+        return this.builder;
     }
 
     public static Builder builder() {
