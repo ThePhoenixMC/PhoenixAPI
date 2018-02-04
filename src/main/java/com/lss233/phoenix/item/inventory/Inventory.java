@@ -59,6 +59,11 @@ public interface Inventory extends Nameable {
      */
     int size();
 
+    /**
+     * Gets the inventory type of this inventory.
+     * @return The inventory type.
+     */
+    InventoryType getInventoryType();
 
     /**
      * A Builder for {@link Inventory}.
