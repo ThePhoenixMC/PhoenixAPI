@@ -3,6 +3,8 @@ package com.lss233.phoenix.entity;
 import com.lss233.phoenix.utils.Identifiable;
 import com.lss233.phoenix.world.Location;
 import com.lss233.phoenix.world.Locatable;
+import com.lss233.phoenix.world.World;
+
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +20,7 @@ public interface Entity extends Locatable, Identifiable {
      * Gets the type of this entity.
      * @return The type of this entity.
      */
-    EntityTypes getType();
+    EntityType getType();
 
 
     /**
@@ -102,5 +104,15 @@ public interface Entity extends Locatable, Identifiable {
      */
     boolean teleport(Entity entity);
 
+    /**
+     * Gets the nearby entities within the desired distance.
+     *
+     * @see World#getNearbyEntities(com.lss233.phoenix.math.Vector, double)
+     * @param distance The distance
+     * @return The list of nearby entities
+     */
+    default List<Entity> getNearbyEntities(double distance) {
+        return getWorld().getNearbyEntities(this.getLocation().getVector(), distance);
+    }
 
 }
