@@ -1,6 +1,6 @@
 package com.lss233.phoenix.world;
 
-import com.lss233.phoenix.block.Block;
+import com.lss233.phoenix.math.Vector;
 
 import java.util.Objects;
 
@@ -88,6 +88,10 @@ public class Location {
 
     public void setPitch(float pitch) {
         this.pitch = pitch;
+    }
+
+    public Vector getVector(){
+        return new Vector(x,y,z);
     }
 
     @Override
