@@ -14,5 +14,7 @@ public interface Locatable {
      * Gets the world that this source resides in.
      * @return The world of the source.
      */
-    World getWorld();
+    default World getWorld(){
+        return getLocation().getWorld();
+    }
 }
