@@ -57,8 +57,9 @@ public enum InventoryType {
     /**
      * A player's inventory, with 9x1 hot bar, 9x3 main inventory, and 4
      * ARMOR slots.
-     * <br />
-     * Cannot be opened by server.
+     * <p>
+     *  Cannot be opened by server.
+     *  </p>
      */
     PLAYER,
     /**
