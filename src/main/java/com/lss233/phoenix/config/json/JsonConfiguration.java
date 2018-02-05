@@ -16,7 +16,7 @@ import java.util.Map;
 public class JsonConfiguration extends MemoryConfiguration implements FileConfiguration{
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private File source;
-    private HashMap<String, Object> map;
+    private HashMap<String, Object> map = new HashMap<>();
 
     /**
      * Creates a JsonConfiguration by a map.
@@ -63,7 +63,7 @@ public class JsonConfiguration extends MemoryConfiguration implements FileConfig
     @Override
     public void save(File source) throws IOException {
         try(Writer writer = new OutputStreamWriter(new FileOutputStream(source))){
-            gson.toJson(map, writer);
+            gson.toJson(getMap(), writer);
         } catch(IOException ex){
             Phoenix.getLogger("Phoenix").warn("Cannot write to " + source);
             throw ex;
@@ -77,7 +77,7 @@ public class JsonConfiguration extends MemoryConfiguration implements FileConfig
     @Override
     public void reload() throws IOException {
         try(Reader reader = new InputStreamReader(new FileInputStream(source))){
-            this.map = gson.fromJson(reader, this.map.getClass());
+            setMap(gson.fromJson(reader, this.map.getClass()) == null ? this.map : gson.fromJson(reader, this.map.getClass()));
         } catch (Exception ex){
             Phoenix.getLogger("Phoenix").warn("Cannot load from " + source);
             throw ex;

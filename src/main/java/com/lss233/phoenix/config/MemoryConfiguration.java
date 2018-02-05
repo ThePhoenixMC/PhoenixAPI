@@ -11,6 +11,14 @@ public class MemoryConfiguration implements ConfigurationSection{
         this.map = map;
     }
 
+    protected Map<String, Object> getMap() {
+        return map;
+    }
+
+    protected void setMap(Map<String, Object> map) {
+        this.map = map;
+    }
+
     protected MemoryConfiguration() {
     }
 
@@ -41,6 +49,7 @@ public class MemoryConfiguration implements ConfigurationSection{
      */
     @Override
     public void set(String key, Object value) {
+        map.put(key, value);
     }
 
     /**
