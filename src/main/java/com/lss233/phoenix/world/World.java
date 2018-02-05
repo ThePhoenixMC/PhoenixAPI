@@ -1,5 +1,6 @@
 package com.lss233.phoenix.world;
 
+import com.lss233.phoenix.block.Block;
 import com.lss233.phoenix.entity.living.Player;
 import com.lss233.phoenix.utils.Identifiable;
 
@@ -35,7 +36,9 @@ public interface World extends Identifiable{
      */
     WorldProperties getProperties();
 
+    boolean setBlock(Block block,boolean force);
+
     default boolean equals(World other){
-        return equals(other);
+        return this.equals((Identifiable)other);
     }
 }
