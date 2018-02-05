@@ -10,7 +10,7 @@ import java.util.UUID;
 /**
  * A loaded Minecraft world.
  */
-public interface World extends Identifiable{
+public interface World extends Identifiable, EntityUniverse{
 
     /**
      * Gets the name of this world.
