@@ -3,7 +3,7 @@ package com.lss233.phoenix.entity;
 /**
  * An enumeration of all possible EntityTypes available in vanilla minecraft.
  */
-public enum  EntityTypes {
+public enum  EntityType {
     AREA_EFFECT_CLOUD ,
 
     ARMOR_STAND ,
