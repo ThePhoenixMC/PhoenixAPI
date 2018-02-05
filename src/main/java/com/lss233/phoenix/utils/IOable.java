@@ -21,7 +21,7 @@ public interface IOable {
      * @throws IOException Thrown when the given file cannot be load.
      * @throws IllegalArgumentException Thrown when file is null.
      */
-     static void load(File file) throws IOException{
+     static void load(File file) {
 
      }
 

@@ -1,5 +1,7 @@
 package com.lss233.phoenix.world;
 
+import com.lss233.phoenix.math.Vector;
+
 import java.util.Objects;
 
 /**
@@ -9,7 +11,8 @@ public class Location {
     private World world;
     private double x, y, z;
     private float yaw, pitch;
-    public Location(World world, double x, double y, double z){
+
+    public Location(World world, double x, double y, double z) {
         this.world = world;
         this.x = x;
         this.y = y;
@@ -87,13 +90,17 @@ public class Location {
         this.pitch = pitch;
     }
 
+    public Vector getVector(){
+        return new Vector(x,y,z);
+    }
+
     @Override
     public int hashCode() {
         // https://stackoverflow.com/questions/113511/best-implementation-for-hashcode-method
         int hash = 15;
-        hash = 37 * hash + (int)Double.doubleToLongBits(this.getX());
-        hash = 37 * hash + (int)Double.doubleToLongBits(this.getY());
-        hash = 37 * hash + (int)Double.doubleToLongBits(this.getZ());
+        hash = 37 * hash + (int) Double.doubleToLongBits(this.getX());
+        hash = 37 * hash + (int) Double.doubleToLongBits(this.getY());
+        hash = 37 * hash + (int) Double.doubleToLongBits(this.getZ());
         hash = 37 * hash + Float.floatToIntBits(this.getYaw());
         hash = 37 * hash + Float.floatToIntBits(this.getPitch());
         return hash;

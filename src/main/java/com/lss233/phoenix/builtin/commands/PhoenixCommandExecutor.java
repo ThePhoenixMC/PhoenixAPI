@@ -13,9 +13,9 @@ public class PhoenixCommandExecutor implements Command {
         return true;
     }
     @CommandRouter(args = "version", permission = "phoenix.admin.version")
-    public boolean version(CommandSender sender, String label, CommandContent args) {
+    public CommandResult version(CommandSender sender, String label, CommandContent args) {
         sender.sendMessage("Server is running on " + Phoenix.getServer().getVersion() + " with Phoenix " + Phoenix.getVersion());
-        return true;
+        return CommandResult.success();
     }
 
     /**
@@ -27,13 +27,13 @@ public class PhoenixCommandExecutor implements Command {
      */
     @Override
     @CommandRouter(args = "help", permission = "phoenix.admin.help")
-    public boolean onRoot(CommandSender sender, CommandContent args) {
+    public CommandResult onRoot(CommandSender sender, CommandContent args) {
         sender.sendMessage("          Phoenix Framework          ");
         sender.sendMessage("-------------------------------------");
         sender.sendMessage("/phoenix help    -    Show help menu.");
         sender.sendMessage("/phoenix reload  -    Reload modules.");
         sender.sendMessage("/phoenix version -    Show Phoenix version.");
-        return true;
+        return CommandResult.success();
     }
 
     /**
@@ -44,7 +44,7 @@ public class PhoenixCommandExecutor implements Command {
      * @return If the command is proceed correctly.
      */
     @Override
-    public boolean onMissHandled(CommandSender sender, CommandContent args) {
+    public CommandResult onMissHandled(CommandSender sender, CommandContent args) {
         return onRoot(sender, args);
     }
 }
