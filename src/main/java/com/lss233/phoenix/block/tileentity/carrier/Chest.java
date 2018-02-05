@@ -1,4 +1,4 @@
-package com.lss233.phoenix.item.inventory.tileentity.carrier;
+package com.lss233.phoenix.block.tileentity.carrier;
 
 /**
  * Represents a Chest.
