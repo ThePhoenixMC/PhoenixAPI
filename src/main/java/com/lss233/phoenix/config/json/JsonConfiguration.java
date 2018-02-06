@@ -77,7 +77,8 @@ public class JsonConfiguration extends MemoryConfiguration implements FileConfig
     @Override
     public void reload() throws IOException {
         try(Reader reader = new InputStreamReader(new FileInputStream(source))){
-            setMap(gson.fromJson(reader, this.map.getClass()) == null ? this.map : gson.fromJson(reader, this.map.getClass()));
+            Map result = gson.fromJson(reader, this.map.getClass());
+            setMap(result == null ? this.map : result);
         } catch (Exception ex){
             Phoenix.getLogger("Phoenix").warn("Cannot load from " + source);
             throw ex;
