@@ -13,6 +13,7 @@ import java.lang.annotation.Target;
 public @interface Table {
     /**
      * The name of the table in the database. If not set then the name is taken from the class name.
+     * @return The name of the table.
      */
     String name() default "";
 }

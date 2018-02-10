@@ -16,6 +16,7 @@ public @interface Field {
 
     /**
      * The name of the column in the database. If not set then the name is taken from the field name.
+     * @return The name of the field.
      */
     String name() default "";
 
@@ -23,16 +24,19 @@ public @interface Field {
      * The DataType associated with the field. If not set then the Java class of the field is used to match with the
      * appropriate DataType. This should only be set if you are overriding the default database type or if the field
      * cannot be automatically determined (ex: byte[]).
+     * @return The data type of the field
      */
     DataType dataType() default DataType.UNKNOW;
 
     /**
      * The default value of the field for creating the table. Default is none.
+     * @return The default value of the field
      */
     String defaultValue() default "";
 
     /**
      * Set this to be true (default false) to have the database add an index for this field.
+     * @return Whether the filed is index
      */
     boolean index() default false;
 
@@ -41,11 +45,13 @@ public @interface Field {
      * table. Use this when you wan a field to be unique even if it is not the identify field. For example, if you have
      * the firstName and lastName fields, both with unique=true and you have "Bob", "Smith" in the database, you cannot
      * insert either "Bob", "Jones" or "Kevin", "Smith".
+     * @return Whether the filed is unique.
      */
     boolean unique() default false;
 
     /**
      * Whether the field can be assigned to null or have no value. Default is true.
+     * @return Whether the field is required.
      */
     boolean require() default true;
 
