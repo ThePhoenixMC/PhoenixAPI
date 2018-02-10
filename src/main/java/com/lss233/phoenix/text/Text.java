@@ -56,6 +56,7 @@ public class Text {
      * string that uses the internal Minecraft color code.
      *
      * @param content The content of the text
+     * @param character  The character that wants to replace
      * @return The created text
      */
     public static Text of(String content, char character){
