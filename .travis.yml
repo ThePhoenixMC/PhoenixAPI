@@ -1,8 +1,7 @@
 language: java
 sudo: false
-script: ./mvnw clean install
+script: mvn clean install
 before_install:
-  - chmod +x mvnw
   - chmod -R +x .utility
 after_success:
   - .utility/push-javadoc-to-gh-pages.sh
@@ -11,5 +10,5 @@ cache:
   - "$HOME/.cache"
 deploy:
   provider: script
-  script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn deploy"
+  script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn deploy -Dmaven.javadoc.skip=true"
   skip_cleanup: true
