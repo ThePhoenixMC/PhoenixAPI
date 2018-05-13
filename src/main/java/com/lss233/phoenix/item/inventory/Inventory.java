@@ -1,6 +1,11 @@
 package com.lss233.phoenix.item.inventory;
 
+import com.lss233.phoenix.Phoenix;
+import com.lss233.phoenix.item.inventory.property.InventoryProperty;
 import com.lss233.phoenix.utils.Nameable;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Base interface for queryable inventories.
@@ -69,5 +74,30 @@ public interface Inventory extends Nameable {
      * A Builder for {@link Inventory}.
      */
     static class Builder {
+        private Map<String, InventoryProperty> properties = new HashMap<>();
+        private InventoryType type;
+        public Inventory build(){
+            return Phoenix.getServer().getInterface().registerInventory(this);
+        }
+        public Map<String, InventoryProperty> getProperties(){
+            return properties;
+        }
+
+        public InventoryType getType() {
+            return type;
+        }
+
+        public void setType(InventoryType type) {
+            this.type = type;
+        }
+
+        public Builder setProperty(String key, InventoryProperty<String,?> property){
+            properties.put(key.toLowerCase(), property);
+            return this;
+        }
+        public Builder setProperty(InventoryProperty<String,?> property){
+            properties.put(property.getDefaultKey().toLowerCase(), property);
+            return this;
+        }
     }
 }
