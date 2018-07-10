@@ -47,6 +47,13 @@ public class InventoryTitle implements InventoryProperty<String, Text> {
         return new InventoryTitle(text);
     }
 
+    /**
+     * Gets the title of this inventory.
+     * @return The title.
+     */
+    public Text getText() {
+        return text;
+    }
 
     @Override
     public String getDefaultKey() {
