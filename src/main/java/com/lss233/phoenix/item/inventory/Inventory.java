@@ -6,6 +6,7 @@ import com.lss233.phoenix.utils.Nameable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Base interface for queryable inventories.
@@ -71,6 +72,20 @@ public interface Inventory extends Nameable {
     InventoryType getInventoryType();
 
     /**
+     * Gets a property of this Inventory if one is defined.
+     * @param property The property name
+     * @return The property if present.
+     */
+    Optional<? extends InventoryProperty<?,?>> getInventoryProperty(Class<? extends InventoryProperty> property);
+
+    /**
+     * Stores the ItemStack at the given index of the inventory.
+     * @param index The index where to put the ItemStack
+     * @param itemStack The ItemStack to set
+     */
+    void setItem(int index, ItemStack itemStack);
+
+    /**
      * A Builder for {@link Inventory}.
      */
     static class Builder {
@@ -83,12 +98,9 @@ public interface Inventory extends Nameable {
             return properties;
         }
 
-        public InventoryType getType() {
-            return type;
-        }
-
-        public void setType(InventoryType type) {
+        public Builder setType(InventoryType type) {
             this.type = type;
+            return this;
         }
 
         public Builder setProperty(String key, InventoryProperty<String,?> property){
