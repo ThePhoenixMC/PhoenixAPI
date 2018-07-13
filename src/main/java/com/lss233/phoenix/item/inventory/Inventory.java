@@ -5,13 +5,14 @@ import com.lss233.phoenix.item.inventory.property.InventoryProperty;
 import com.lss233.phoenix.utils.Nameable;
 
 import java.util.HashMap;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Optional;
 
 /**
  * Base interface for queryable inventories.
  */
-public interface Inventory extends Nameable {
+public interface Inventory extends Nameable, Iterable<ItemStack> {
 
     /**
      * Creates a new {@link Inventory.Builder} to build an {@link Inventory}.
@@ -54,6 +55,12 @@ public interface Inventory extends Nameable {
     int getMaxStackSize();
 
     /**
+     * Sets the maximum stack size of any stack in this ItemList.
+     * @param size The new maximum stack size
+     */
+    void setMaxStackSize(int size);
+
+    /**
      * Gets the maximum number of  {@link ItemStack} the Inventory can hold.
      * @return The maximum number of  {@link ItemStack} the Inventory can hold.
      */
@@ -86,8 +93,18 @@ public interface Inventory extends Nameable {
     void setItem(int index, ItemStack itemStack);
 
     /**
+     * Gets the ItemStack at the given index of this inventory.
+     * @param index The index where to get the ItemStack
+     * @return The ItemStack if exists
+     */
+    Optional<ItemStack> getItem(int index);
+
+    /**
      * A Builder for {@link Inventory}.
      */
+
+    ListIterator<ItemStack>	iterator();
+
     static class Builder {
         private Map<String, InventoryProperty> properties = new HashMap<>();
         private InventoryType type;
@@ -96,6 +113,10 @@ public interface Inventory extends Nameable {
         }
         public Map<String, InventoryProperty> getProperties(){
             return properties;
+        }
+
+        public InventoryType getType() {
+            return type;
         }
 
         public Builder setType(InventoryType type) {

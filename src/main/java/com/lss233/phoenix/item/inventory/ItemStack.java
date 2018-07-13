@@ -45,6 +45,13 @@ public interface ItemStack extends ValueContainer {
      */
     void setQuantity(int quantity);
 
+
+    /**
+     * Gets the maximum quantity per stack.
+     * @return The max stack quantity of this item.
+     */
+    int getMaxStackQuantity();
+
     /**
      * Checks whether this item has the same ItemType,
      * quantity and data.
@@ -73,8 +80,7 @@ public interface ItemStack extends ValueContainer {
     class Builder {
         ItemType itemType;
         int quantity = 100;
-        Map<Key, Object> values = new HashMap<>();
-        Builder instance = this;
+        Map<Key<?>, Object> values = new HashMap<>();
 
         public ItemType getItemType() {
             return itemType;
@@ -96,15 +102,22 @@ public interface ItemStack extends ValueContainer {
         }
 
         public Builder getInstance() {
-            return instance;
+            return this;
         }
-        public Builder add(Key<?> key, Objects value){
+        public <E> Builder add(Key<E> key, E value){
             values.put(key, value);
             return getInstance();
         }
         public Builder remove(Key<?> key){
             values.remove(key);
             return getInstance();
+        }
+
+        public <E> Optional<E> get(Key<E> key){
+            if(values.containsKey(key)){
+                return Optional.of((E)values.get(key));
+            } else
+                return Optional.empty();
         }
 
         public ItemStack build() {
