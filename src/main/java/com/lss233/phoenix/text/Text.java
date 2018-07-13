@@ -25,9 +25,15 @@ import java.util.List;
 public class Text {
 
     private static final char MINECRAFT_COLOR_CHARACTER = '§';
+    private String content;
+    private TextStyle style;
+    private TextColor color;
     private List<Text> children;
 
-    public Text(List<Text> children) {
+    public Text(String content, TextStyle style, TextColor color, List<Text> children) {
+        this.content = content;
+        this.style = style;
+        this.color = color;
         this.children = children;
     }
 
@@ -84,8 +90,49 @@ public class Text {
         return this.children;
     }
 
+    /**
+     * Gets the content of this instance.
+     *
+     * @return The content
+     */
+    public String getContent() {
+        return content;
+    }
+
+    /**
+     * Gets the style of this instance.
+     *
+     * @return The style
+     */
+    public TextStyle getStyle() {
+        return style;
+    }
+
+    /**
+     * Gets the color of this instance.
+     *
+     * @return The color
+     */
+    public TextColor getColor() {
+        return color;
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(MINECRAFT_COLOR_CHARACTER).append(getStyle().getCode());
+        stringBuilder.append(MINECRAFT_COLOR_CHARACTER).append(getColor().getCode());
+        stringBuilder.append(content);
+        for (Text text : getChildren()) {
+            stringBuilder.append(text.toString());
+        }
+        return stringBuilder.toString();
+    }
+
     public static class Builder {
         private List<Text> children = new ArrayList<>();
+        private TextStyle style = TextStyle.RESET;
+        private TextColor color = TextColor.WHITE;
         private String content;
 
         Builder(String content) {
@@ -113,8 +160,79 @@ public class Text {
          * @return An unmodifiable list of the current children
          * @see Text#getChildren()
          */
-        public final List getChildren() {
+        public final List<Text> getChildren() {
             return Collections.unmodifiableList(this.children);
+        }
+
+        /**
+         * Returns the children.
+         *
+         * @param children The children
+         * @return The builder instance.
+         */
+        public Builder setChildren(List<Text> children) {
+            this.children = children;
+            return this;
+        }
+
+        /**
+         * Gets the style of this instance.
+         *
+         * @return The style
+         */
+        public TextStyle getStyle() {
+            return style;
+        }
+
+        /**
+         * Returns the style.
+         *
+         * @param style The style
+         * @return The builder instance.
+         */
+        public Builder setStyle(TextStyle style) {
+            this.style = style;
+            return this;
+        }
+
+        /**
+         * Gets the color of this instance.
+         *
+         * @return The color
+         */
+        public TextColor getColor() {
+            return color;
+        }
+
+        /**
+         * Returns the color.
+         *
+         * @param color The color
+         * @return The builder instance.
+         */
+        public Builder setColor(TextColor color) {
+            this.color = color;
+            return this;
+        }
+
+        /**
+         * Gets the content of this instance.
+         *
+         * @return The content
+         */
+        public String getContent() {
+            return content;
+        }
+
+        /**
+         * Returns the content.
+         *
+         * @param content The content
+         * @return The builder instance.
+         */
+        public Builder setContent(String content) {
+            this.content = content;
+            return this;
         }
 
         /**
@@ -125,7 +243,7 @@ public class Text {
          *         builder
          */
         public Text build() {
-            return new Text(this.children);
+            return new Text(getContent(), getStyle(), getColor(), getChildren());
         }
     }
 }
