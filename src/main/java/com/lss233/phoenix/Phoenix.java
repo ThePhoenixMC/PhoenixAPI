@@ -7,7 +7,9 @@ import com.lss233.phoenix.command.CommandManager;
 import com.lss233.phoenix.config.ConfigurationManager;
 import com.lss233.phoenix.entity.living.Player;
 import com.lss233.phoenix.event.EventManager;
+import com.lss233.phoenix.item.enchantment.Enchantment;
 import com.lss233.phoenix.item.inventory.Inventory;
+import com.lss233.phoenix.item.inventory.ItemStack;
 import com.lss233.phoenix.logging.Logger;
 import com.lss233.phoenix.logging.ModuleLogger;
 import com.lss233.phoenix.module.Module;
@@ -141,6 +143,10 @@ public final class Phoenix {
             MessageChannelManager getMessageChannelManager();
 
             Inventory registerInventory(Inventory.Builder builder);
+
+            ItemStack registerItemStack(ItemStack.Builder builder);
+
+            Enchantment registerEnchantment(Enchantment.Builder builder);
 
             interface MessageChannelManager {
                 void registerOutgoingPluginChannel(Module module, String channelName);
