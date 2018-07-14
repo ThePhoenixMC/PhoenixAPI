@@ -40,7 +40,7 @@ public enum EnchantmentType {
     FORTUNE("Fortune", 0, 3, 2, false, false),
     FROST_WALKER("Frost Walker", 0, 2, 2, false, false),
     IMPALING("Impaling", 0, 5, 2, false, false),
-    Infinity("Infinity", 0, 1, 1, false, false),
+    INFINITY("Infinity", 0, 1, 1, false, false),
     KNOCKBACK("Knockback", 0, 2, 5, false, false),
     LOOTING("Looting", 0, 3, 2, false, false),
     LOYALTY("Loyalty", 0, 3, 5, false, false),
