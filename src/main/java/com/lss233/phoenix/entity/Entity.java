@@ -1,5 +1,6 @@
 package com.lss233.phoenix.entity;
 
+import com.lss233.phoenix.math.Vector;
 import com.lss233.phoenix.utils.Identifiable;
 import com.lss233.phoenix.world.Location;
 import com.lss233.phoenix.world.Locatable;
@@ -8,7 +9,6 @@ import com.lss233.phoenix.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
-import java.util.Vector;
 
 
 /**
