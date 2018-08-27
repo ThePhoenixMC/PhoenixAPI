@@ -35,15 +35,15 @@ public  abstract class Module {
      * Gets the default logger of this module.
      * @return The logger
      */
-    private Logger getLogger() {
+    public Logger getLogger() {
         return Phoenix.getLogger(ModuleManager.getModuleInfo(this).getName());
     }
 
-    private JsonConfiguration getConfig() throws IOException {
+    public JsonConfiguration getConfig() throws IOException {
         return Phoenix.getConfigurationManager().getConfig(this);
     }
 
-    State getState() {
+    public State getState() {
         return state;
     }
 
