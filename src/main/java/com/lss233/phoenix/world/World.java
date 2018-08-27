@@ -41,4 +41,76 @@ public interface World extends Identifiable, EntityUniverse{
     default boolean equals(World other){
         return this.equals((Identifiable)other);
     }
+
+    /**
+     * Gets the Location of the spawn point.
+     * @return The location
+     */
+    Location getSpawnLocation();
+
+    /**
+     * Gets the sea level for this world.
+     * @return The sea level.
+     */
+    int	getSeaLevel();
+
+    /**
+     * Saves world to disk
+     */
+    void save();
+
+    /**
+     * Gets chunk at the given chunk coordinate position.
+     * @param x X-coordinate of the chunk
+     * @param z Z-coordinate of the chunk
+     * @return
+     */
+    Chunk getChunk(int x, int z);
+
+    /**
+     * Gets the Chunk at the given Location
+     * @param location Location of the chunk
+     * @return Chunk at the given location
+     */
+    Chunk getChunk(Location location);
+
+    /**
+     * Gets the Chunk that contains the given Block
+     * @param block Location of the chunk
+     * @return Chunk at the given location
+     */
+    default Chunk getChunk(Block block){
+        return getChunk(block.getBlockLocation());
+    }
+
+    /**
+     * Loads the Chunk at the specified coordinates
+     * @param x X-coordinate of the chunk
+     * @param z Z-coordinate of the chunk
+     * @param shouldGenerate Whether or not to generate a chunk if it doesn't already exist.
+     * @return true if the chunk has loaded successfully, otherwise false.
+     */
+    boolean loadChunk(int x, int z, boolean shouldGenerate);
+
+    /**
+     * Unload the specified
+     * @param chunk The chunk
+     * @return True if successfully loaded.
+     */
+    boolean unloadChunk(Chunk chunk);
+
+    /**
+     * Creates explosion at given coordinates with given power
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @param z Z coordinate
+     * @param power he power of explosion, where 4F is TNT
+     */
+    void createExplosion​(double x, double y, double z, float power);
+
+    /**
+     * Returns a Collection of all actively loaded chunks in this world.
+     * @return The loaded chunks
+     */
+    List<Chunk> getLoadedChunks();
 }
