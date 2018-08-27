@@ -12,17 +12,22 @@ public class ModuleLogger implements Logger{
     }
 
     @Override
-    public void info(String msg) {
+    public void info(Object msg) {
         Phoenix.getServer().getLogger().info("["+PREFIX+"]"+msg);
     }
 
     @Override
-    public void warn(String msg) {
+    public void warn(Object msg) {
         Phoenix.getServer().getLogger().warn("["+PREFIX+"]"+msg);
     }
 
     @Override
-    public void debug(String msg) {
+    public void debug(Object msg) {
             Phoenix.getServer().getLogger().debug("["+PREFIX+"]"+msg);
+    }
+
+    @Override
+    public void severe(Object msg) {
+        Phoenix.getServer().getLogger().debug("["+PREFIX+"]"+msg);
     }
 }
