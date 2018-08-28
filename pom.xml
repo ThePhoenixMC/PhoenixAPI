@@ -24,12 +24,12 @@
         <repository>
             <id>central</id>
             <name>Lss233's OSS-releases</name>
-            <url>https://lss233.com/artifactory/PhoenixMC</url>
+            <url> http://murky.rawcontent.lss233.com:2082/artifactory/PhoenixMC</url>
         </repository>
         <snapshotRepository>
             <id>snapshots</id>
             <name>Lss233's OSS-snapshots</name>
-            <url>https://lss233.com/artifactory/PhoenixMC</url>
+            <url> http://murky.rawcontent.lss233.com:2082/artifactory/PhoenixMC</url>
         </snapshotRepository>
     </distributionManagement>
     <build>
