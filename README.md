@@ -3,6 +3,7 @@
 Cross server-side plugin framework.
 
 * TeamCity: <a href="https://ci.lss233.com/viewType.html?buildTypeId=PhoenixFramework_API&guest=1"><img src="https://ci.lss233.com/app/rest/builds/buildType:(id:PhoenixFramework_API)/statusIcon" alt="TC Build"/></a> 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ffc28ae8f9524b90a83a4039b8e378d4)](https://app.codacy.com/app/PhoenixMC/PhoenixAPI?utm_source=github.com&utm_medium=referral&utm_content=ThePhoenixMC/PhoenixAPI&utm_campaign=Badge_Grade_Dashboard)
 * Travis CI: [![Build Status](https://travis-ci.org/ThePhoenixMC/PhoenixAPI.svg?branch=master)](https://travis-ci.org/ThePhoenixMC/PhoenixAPI)
 * Circle CI: [![CircleCI](https://circleci.com/gh/ThePhoenixMC/PhoenixAPI.svg?style=svg)](https://circleci.com/gh/ThePhoenixMC/PhoenixAPI)
 
