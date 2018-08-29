@@ -6,8 +6,8 @@
 [![Build Status](https://travis-ci.org/ThePhoenixMC/PhoenixAPI.svg?branch=master)](https://travis-ci.org/ThePhoenixMC/PhoenixAPI)
 [![MIT](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/ThePhoenixMC/PhoenixAPI/blob/master/LICENSE)
 [![Gitter](https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667)](https://gitter.im/ThePhoenixMC)
-![GitHub forks](https://img.shields.io/github/forks/badges/shields.svg?style=flat-square&label=Fork)
-![GitHub stars](https://img.shields.io/github/stars/badges/shields.svg?style=flat-square&label=Stars)
+[![GitHub forks](https://img.shields.io/github/forks/ThePhoenixMC/PhoenixAPI.svg?style=flat-square&label=Fork)](https://github.com/ThePhoenixMC/PhoenixAPI/fork)
+![GitHub stars](https://img.shields.io/github/stars/ThePhoenixMC/PhoenixAPI.svg?style=flat-square&label=Stars)
 
 跨服务端插件框架.  
 
