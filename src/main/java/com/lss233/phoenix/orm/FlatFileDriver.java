@@ -17,8 +17,7 @@ public class FlatFileDriver implements ORMDriver {
 
     @Override
     public void connect() throws ORMException {
-        if(!dbFolder.exists())
-            if(!dbFolder.mkdirs())
+        if(!dbFolder.exists() && !dbFolder.mkdirs())
                 throw new ORMException("Failed to create database directory.");
     }
 }

@@ -125,6 +125,8 @@ public class CommandManager {
                     if (!(sender instanceof RemoteConsoleCommandSender))
                         return false;
                     break;
+                default:
+                    return false;
             }
         return true;
     }
@@ -147,7 +149,8 @@ public class CommandManager {
         CommandRouter[] routers;
         Matcher matcher;
         String[] vArgs;
-        String vArg, oArg;
+        String vArg;
+        String oArg;
 
         if (cmd == null)
             return CommandResult.notFound();

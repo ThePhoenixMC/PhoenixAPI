@@ -30,7 +30,7 @@ public class Key<V> {
         this.key = key;
     }
 
-    static <V> Key<V> of(String key){
+    public static <V> Key<V> of(String key){
         return new Key<>(key);
     }
 

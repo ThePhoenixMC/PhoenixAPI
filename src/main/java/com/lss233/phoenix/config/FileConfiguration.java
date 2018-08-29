@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  *
  */
-public interface FileConfiguration extends Configuration{
+public interface FileConfiguration extends Configuration, IOable{
     /**
      * Reload configuration from file.
      * @throws IOException Failed to load file.

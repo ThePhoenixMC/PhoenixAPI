@@ -1,6 +1,5 @@
 package com.lss233.phoenix.event.block;
 
-import com.lss233.phoenix.block.Block;
 import com.lss233.phoenix.event.Cancellable;
 import com.lss233.phoenix.event.Event;
 

@@ -78,9 +78,9 @@ public interface ItemStack extends ValueContainer {
     }
 
     class Builder {
-        ItemType itemType;
-        int quantity = 100;
-        Map<Key<?>, Object> values = new HashMap<>();
+        private ItemType itemType;
+        private int quantity = 100;
+        private Map<Key<?>, Object> values = new HashMap<>();
 
         public ItemType getItemType() {
             return itemType;

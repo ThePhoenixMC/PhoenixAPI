@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.lss233.phoenix.permissions.Permissible;
+package com.lss233.phoenix.permissions;
 
 public interface Permissible {
 

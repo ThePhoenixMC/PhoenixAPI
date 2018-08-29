@@ -26,8 +26,7 @@ public final class Cause {
 
     public <T> Optional get(String name, Class<T> target) {
         for (int i = 0; i < names.length; i++)
-            if (this.names[i].equalsIgnoreCase(name))
-                if (target.isInstance(this.cause[i]))
+            if (this.names[i].equalsIgnoreCase(name) && target.isInstance(this.cause[i]))
                     return Optional.of(this.cause[i]);
         return Optional.empty();
     }
