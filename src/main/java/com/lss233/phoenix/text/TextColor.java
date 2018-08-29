@@ -53,7 +53,9 @@ public enum TextColor {
     private final int backgroundB;
     private final int backgroundHex;
 
-    TextColor(char code, String officialName, int foregroundR, int foregroundG, int foregroundB, int foregroundHex, int backgroundR, int backgroundG, int backgroundB, int backgroundHex) {
+    TextColor(char code, String officialName,
+              int foregroundR, int foregroundG, int foregroundB, int foregroundHex,
+              int backgroundR, int backgroundG, int backgroundB, int backgroundHex) {
         this.code = code;
         this.officialName = officialName;
         this.foregroundR = foregroundR;

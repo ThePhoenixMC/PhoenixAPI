@@ -62,15 +62,15 @@ public class Location {
         this.z = z;
     }
 
-    int getBlockX() {
+    public int getBlockX() {
         return (int) Math.round(x);
     }
 
-    int getBlockY() {
+    public int getBlockY() {
         return (int) Math.round(y);
     }
 
-    int getBlockZ() {
+    public int getBlockZ() {
         return (int) Math.round(z);
     }
 

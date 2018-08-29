@@ -114,12 +114,13 @@ public class CommandResult {
     }
 
     public static class Builder {
-        int affectedBlocks = 0;
-        int affectedEntities = 0;
-        int affectedItems = 0;
-        int successCount = 0;
-        int invokedExecutors = 0;
-        int queryResult = 0;
+        private int affectedBlocks = 0;
+        private int affectedEntities = 0;
+        private int affectedItems = 0;
+        private int successCount = 0;
+        private int invokedExecutors = 0;
+        private int queryResult = 0;
+        private Reason reason = Reason.NONE;
 
         public int getInvokedExecutors() {
             return invokedExecutors;
@@ -129,7 +130,6 @@ public class CommandResult {
             this.invokedExecutors = invokedExecutors;
             return this;
         }
-        Reason reason = Reason.NONE;
 
         public CommandResult build(){
             return new CommandResult(affectedBlocks, affectedEntities, affectedItems, successCount, queryResult, invokedExecutors, reason);

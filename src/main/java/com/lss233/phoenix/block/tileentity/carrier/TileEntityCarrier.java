@@ -1,7 +1,6 @@
 package com.lss233.phoenix.block.tileentity.carrier;
 
 import com.lss233.phoenix.item.inventory.BlockCarrier;
-import com.lss233.phoenix.item.inventory.Carrier;
 import com.lss233.phoenix.item.inventory.TileEntityInventory;
 import com.lss233.phoenix.block.tileentity.TileEntity;
 
