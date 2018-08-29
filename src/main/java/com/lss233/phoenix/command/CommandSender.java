@@ -1,6 +1,6 @@
 package com.lss233.phoenix.command;
 
-import com.lss233.phoenix.permissions.Permissible.Permissible;
+import com.lss233.phoenix.permissions.Permissible;
 
 /**
  * .
