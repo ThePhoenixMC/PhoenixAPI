@@ -144,7 +144,7 @@ public class CommandResult {
             return this;
         }
 
-        public Builder append(CommandResult commandResult){
+        Builder append(CommandResult commandResult){
             queryResult += commandResult.getQueryResult();
             successCount += commandResult.getSuccessCount();
             affectedItems += commandResult.getAffectedItems();
@@ -185,7 +185,7 @@ public class CommandResult {
             return successCount;
         }
 
-        public Builder setSuccessCount(int successCount) {
+        Builder setSuccessCount(int successCount) {
             this.successCount = successCount;
             return this;
         }
