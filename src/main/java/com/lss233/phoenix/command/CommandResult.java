@@ -107,9 +107,35 @@ public class CommandResult {
                 .build();
     }
 
+    /**
+     * Returns a result indicating the command was not processed successfully
+     * because of the invalid argument.
+     * @return The command result.
+     */
+    public static CommandResult invalidArgument() {
+        return new Builder()
+                .setReason(Reason.INVALID_ARGUMENT)
+                .setSuccessCount(0)
+                .build();
+    }
+
+    /**
+     * Returns a result indicating the command was not processed successfully
+     * because of a internal error.
+     * @return The command result.
+     */
+    public static CommandResult internalError() {
+        return new Builder()
+                .setReason(Reason.INTERNAL_ERROR)
+                .setSuccessCount(0)
+                .build();
+    }
+
     public enum Reason{
         NOT_FOUND,
         NO_PERMISSION,
+        INVALID_ARGUMENT,
+        INTERNAL_ERROR,
         NONE,
     }
 
