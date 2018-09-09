@@ -5,13 +5,8 @@ import com.lss233.phoenix.event.Event;
 
 /**
  * Represents an event fired when a Living changed its inventory
- * Cause:
- * <ul>
- *     <li>player - The player.</li>
- *     <li>item - The item.</li>
- * </ul>
  */
-public interface ChangeInventoryEvent extends Event, Cancellable {
+public interface ChangeInventoryEvent extends TargetInventoryEvent, Cancellable {
     /**
      * Fired when a Living changes it's equipment.
      */
@@ -30,6 +25,13 @@ public interface ChangeInventoryEvent extends Event, Cancellable {
      * Fired when a Living picked up a ItemStack
      */
     interface Pickup extends ChangeInventoryEvent{
+
+    }
+
+    /**
+     * Fired when an Inventory transfers items into another.
+     */
+    interface Transfer extends ChangeInventoryEvent {
 
     }
 }
