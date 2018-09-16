@@ -24,13 +24,19 @@ public enum  EntityType {
 
     COMPLEX_PART ,
 
+    COD ,
+
     COW ,
 
     CREEPER ,
 
     DONKEY ,
 
+    DOLPHIN ,
+
     DRAGON_FIREBALL ,
+
+    DROWNED ,
 
     EGG ,
 
@@ -44,9 +50,9 @@ public enum  EntityType {
 
     ENDER_DRAGON ,
 
-    ENDER_PEARL ,
+    ENDER_CUARDIAN ,
 
-    EVOCATION_FANGS ,
+    ENDER_PEARL ,
 
     EVOCATION_ILLAGER ,
 
@@ -120,9 +126,15 @@ public enum  EntityType {
 
     RABBIT ,
 
+    PHANTON ,
+
+    PUFFER_FISH ,
+
     RIDEABLE_MINECART ,
 
     SHEEP ,
+
+    SALMON ,
 
     SHULKER ,
 
@@ -156,6 +168,12 @@ public enum  EntityType {
 
     TIPPED_ARROW ,
 
+    TROPICAL_FISH ,
+
+    THROWN_TRIDENT ,
+
+    TURTLE ,
+
     TNT_MINECART ,
 
     UNKNOWN ,
@@ -182,5 +200,5 @@ public enum  EntityType {
 
     ZOMBIE_HORSE ,
 
-    ZOMBIE_VILLAGER ,
+    ZOMBIE_VILLAGER;
 }
