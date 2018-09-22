@@ -1,5 +1,6 @@
 package com.lss233.phoenix.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lss233.phoenix.math.Vector;
 import com.lss233.phoenix.utils.Identifiable;
 import com.lss233.phoenix.world.Location;
@@ -115,4 +116,9 @@ public interface Entity extends Locatable, Identifiable {
         return getWorld().getNearbyEntities(this.getLocation().getVector(), distance);
     }
 
+    @Override
+    @JsonIgnore
+    default World getWorld(){
+        return getLocation().getWorld();
+    }
 }

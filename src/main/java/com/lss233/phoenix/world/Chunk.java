@@ -24,7 +24,14 @@
 
 package com.lss233.phoenix.world;
 
-public interface Chunk extends EntityUniverse{
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.lss233.phoenix.config.json.deserializer.ChunkDeserializer;
+import com.lss233.phoenix.config.json.serializer.ChunkSerializer;
+
+@JsonDeserialize(using = ChunkDeserializer.class)
+@JsonSerialize(using = ChunkSerializer.class)
+public interface Chunk extends EntityUniverse {
 
     /**
      * Gets the world containing this chunk

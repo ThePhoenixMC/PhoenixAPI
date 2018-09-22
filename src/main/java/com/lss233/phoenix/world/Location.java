@@ -1,5 +1,9 @@
 package com.lss233.phoenix.world;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.lss233.phoenix.config.json.deserializer.LocationDeserializer;
+import com.lss233.phoenix.config.json.serializer.LocationSerializer;
 import com.lss233.phoenix.math.Vector;
 
 import java.util.Objects;
@@ -7,6 +11,8 @@ import java.util.Objects;
 /**
  * A Minecraft location.
  */
+@JsonDeserialize(using = LocationDeserializer.class)
+@JsonSerialize(using = LocationSerializer.class)
 public class Location {
     private World world;
     private double x, y, z;

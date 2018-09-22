@@ -1,7 +1,6 @@
 package com.lss233.phoenix.config.json;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lss233.phoenix.Phoenix;
 import com.lss233.phoenix.config.FileConfiguration;
 import com.lss233.phoenix.config.MemoryConfiguration;
@@ -14,7 +13,7 @@ import java.util.Map;
  *
  */
 public class JsonConfiguration extends MemoryConfiguration implements FileConfiguration{
-    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private final ObjectMapper mapper = new ObjectMapper();
     private File source;
     private HashMap<String, Object> map = new HashMap<>();
 
@@ -63,7 +62,8 @@ public class JsonConfiguration extends MemoryConfiguration implements FileConfig
     @Override
     public void save(File source) throws IOException {
         try(Writer writer = new OutputStreamWriter(new FileOutputStream(source))){
-            gson.toJson(getMap(), writer);
+            mapper.writerWithDefaultPrettyPrinter()
+                    .writeValue(writer, getMap());
         } catch(IOException ex){
             Phoenix.getLogger("Phoenix").warn("Cannot write to " + source);
             throw ex;
@@ -77,7 +77,7 @@ public class JsonConfiguration extends MemoryConfiguration implements FileConfig
     @Override
     public void reload() throws IOException {
         try(Reader reader = new InputStreamReader(new FileInputStream(source))){
-            Map result = gson.fromJson(reader, this.map.getClass());
+            Map result = mapper.readValue(reader, this.map.getClass());
             setMap(result == null ? this.map : result);
         } catch (Exception ex){
             Phoenix.getLogger("Phoenix").warn("Cannot load from " + source);
