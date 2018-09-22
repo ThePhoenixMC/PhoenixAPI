@@ -1,11 +1,11 @@
 package com.lss233.phoenix.block;
 
+import com.google.common.base.Preconditions;
 import com.lss233.phoenix.world.Location;
 
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 
 /**
  * .
@@ -19,8 +19,8 @@ public class Block {
 
     private Block(Builder builder) {
         this.builder = builder;
-        this.blockState = checkNotNull(builder.blockState);
-        this.blockLocation = checkNotNull(builder.location);
+        this.blockState = Preconditions.checkNotNull(builder.blockState);
+        this.blockLocation = Preconditions.checkNotNull(builder.location);
         this.creator = builder.creator;
     }
 
