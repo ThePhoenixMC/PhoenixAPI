@@ -2,9 +2,12 @@ language: java
 sudo: false
 script: mvn clean install
 before_install:
+  - wget https://dl.bintray.com/jfrog/jfrog-cli-go/1.20.0/jfrog-cli-linux-amd64/jfrog
+  - chmod +x jfrog
   - chmod -R +x .utility
 after_success:
   - .utility/push-javadoc-to-gh-pages.sh
+  - .utility/push-build-to-artifactory.sh
 cache:
   directories:
   - "$HOME/.cache"
