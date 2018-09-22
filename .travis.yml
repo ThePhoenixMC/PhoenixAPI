@@ -13,5 +13,5 @@ cache:
   - "$HOME/.cache"
 deploy:
   provider: script
-  script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn deploy -Dmaven.javadoc.skip=true"
+  script: "cp .utility/.travis.settings.xml $HOME/.m2/settings.xml && mvn deploy -Dmaven.javadoc.skip=true"
   skip_cleanup: true
